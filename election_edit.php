@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add New Election - Denver Post nelex</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="language" content="en, sv" />
+    <meta name="Copyright" content="Copyright &copy; The Denver Post." />
+
+    <!-- STYLE SHEETS -->
+    <link rel="stylesheet" href="https://extras.denverpost.com/transgender/css/foundation.min.css" />
+    <link rel="stylesheet" href="https://extras.denverpost.com/transgender/css/normalize.css" />
+    <link rel="stylesheet" href="style.css" />
+
+    <link rel="shortcut icon" href="//plus.denverpost.com/favicon.ico" type="image/x-icon" />
+
+    <link href='https://fonts.googleapis.com/css?family=Noticia+Text:400,700,400italic,700italic|PT+Sans:400,700,400italic,700italic|PT+Sans+Narrow:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- SCRIPTS -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://extras.denverpost.com/foundation/js/vendor/modernizr.js"></script>
+  </head>
+  <body>
+  	
+
+    <section id="header">
+      <!-- NAVIGATION BAR -->
+      <div id="top-bar-margin" class="sticky">
+        <nav class="top-bar" data-topbar role="navigation">
+          <ul class="title-area">
+            <li class="name">
+              <a href="./"><img src="./nelex-logo.png" alt="nelex logo" class="nav-logo"></a>
+            </li>
+          </ul></nav>
+      </div> <!-- Closes top-bar-margin -->
+
+    <!-- SOCIAL MEDIA BUTTONS -->
+    <div id="footer-whole">
+      <div class="row">
+        <div class="large-9 medium-9 small-12 columns">
+          <h1>Election Administrator</h1>
+        </div>
+    </div>
+  </section>
+
+    <div class="row">
+      <div class="Large-8 large-centered medium-10 medium-centered columns">
+        <h2>Add/Edit Election</h2>
+          <p>Every election must have a date and a type (general, primary, etc.). You can also choose at this time to make the election "live," which means results will be actively updated ass you add places to track.</p>
+      </div>
+    </div>
+
+    <section id="submit-form">
+      <p id="form-messages" class="alert-box success radius text-center" style="display:none;"></p>
+      <form id="ajax-submit" method="post" enctype="multipart/form-data">
+        <div id="theforms" class="row">
+          <div class="Large-8 large-centered medium-10 medium-centered columns">
+            <fieldset>
+              <legend>Settings</legend>
+              <div class="row">
+                <div class="large-2 large-push-1 columns">
+                  <label for="title">Election Type</label>
+                </div>
+                <div class="large-6 large-pull-3 columns">
+                  <select name="election_type" id="election_type">
+                    <option value="general" selected>General</option>
+                    <option value="primary">Primary</option>
+                    <option value="special">Special</option>
+                    <option value="runoff">Runoff</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="large-2 large-push-1 columns">
+                  <label for="desc">Election Date</label>
+                </div>
+                <div class="large-6 large-pull-3 columns">
+                  <input type="text" tabindex="1" name="title" id="title" placeholder="00/00/0000" required />
+                </div>
+              </div>
+              <div class="row">
+                <div class="large-2 large-push-1 columns">
+                  <label for="acknowledgement">Status</label>
+                </div>
+                <div class="large-6 large-pull-3 columns">
+                  <div class="row">
+                    <div class="large-1 columns">
+                      <input type="checkbox" tabindex="3" name="acknowledgement" id="acknowledgement" required />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="large-12 columns text-center">
+                  <input type="submit" tabindex="4" class="button large-12 columns" style="margin-top:2em;padding:1em 2em" value="CREATE ELECTION" />
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+    </form>
+    </section>
+
+    <div class="row">
+      <div class="large-10 large-centered medium-10 medium-centered columns">
+      <p class="text-center" style="margin:2em 0;"><em>Questions or problems? Email <a href="mailto:dpo@denverpost.com?subject=NELEX%20PROBLEM%20add%20new%20election">dpo@denverpost.com</a>.</em></p>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- FOOTER SOCIAL MEDIA BUTTONS -->
+    <div id="footer-whole">
+      <div class="row">
+        <div class="large-12 medium-12 columns">
+          <p class="left">Copyright &copy; 2018 The Denver Post</p>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://extras.denverpost.com/foundation/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+  </body>
+</html>
