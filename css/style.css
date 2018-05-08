@@ -69,7 +69,10 @@ h2 {
 form input[type="submit"] {
     padding:.5em 1.5em;
 }
-
+legend {
+  padding:0 1em;
+  color:#999999;
+}
 #theforms input[type="checkbox"] {
   -webkit-appearance: none;
   background-color: #fafafa;

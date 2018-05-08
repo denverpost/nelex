@@ -9,17 +9,17 @@
     <meta name="Copyright" content="Copyright &copy; The Denver Post." />
 
     <!-- STYLE SHEETS -->
-    <link rel="stylesheet" href="https://extras.denverpost.com/transgender/css/foundation.min.css" />
-    <link rel="stylesheet" href="https://extras.denverpost.com/transgender/css/normalize.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./css/foundation.min.css" />
+    <link rel="stylesheet" href="./css/normalize.min.css" />
+    <link rel="stylesheet" href="./css/style.css" />
 
     <link rel="shortcut icon" href="//plus.denverpost.com/favicon.ico" type="image/x-icon" />
 
     <link href='https://fonts.googleapis.com/css?family=Noticia+Text:400,700,400italic,700italic|PT+Sans:400,700,400italic,700italic|PT+Sans+Narrow:400,700' rel='stylesheet' type='text/css'>
 
     <!-- SCRIPTS -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="https://extras.denverpost.com/foundation/js/vendor/modernizr.js"></script>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/modernizr.min.js"></script>
   </head>
   <body>
   	
@@ -63,7 +63,7 @@
                   <label for="title">Election Type</label>
                 </div>
                 <div class="large-6 large-pull-3 columns">
-                  <select name="election_type" id="election_type">
+                  <select tabindex="1" name="election_type" id="election_type" required>
                     <option value="general" selected>General</option>
                     <option value="primary">Primary</option>
                     <option value="special">Special</option>
@@ -76,17 +76,17 @@
                   <label for="desc">Election Date</label>
                 </div>
                 <div class="large-6 large-pull-3 columns">
-                  <input type="text" tabindex="1" name="title" id="title" placeholder="00/00/0000" required />
+                  <input type="text" tabindex="2" name="election_date" id="election_date" placeholder="00/00/0000" required />
                 </div>
               </div>
               <div class="row">
                 <div class="large-2 large-push-1 columns">
-                  <label for="acknowledgement">Status</label>
+                  <label for="election_live">Status</label>
                 </div>
                 <div class="large-6 large-pull-3 columns">
                   <div class="row">
                     <div class="large-1 columns">
-                      <input type="checkbox" tabindex="3" name="acknowledgement" id="acknowledgement" required />
+                      <input type="checkbox" tabindex="3" name="election_live" id="election_live" />
                     </div>
                   </div>
                 </div>
@@ -120,9 +120,10 @@
       </div>
     </div>
 
-    <script src="https://extras.denverpost.com/foundation/js/foundation.min.js"></script>
+    <script src="./js/foundation.min.js"></script>
     <script>
       $(document).foundation();
+    </script>
     </script>
   </body>
 </html>
