@@ -46,6 +46,9 @@ if (isset($_POST['election_date']) && isset($_POST['data_url']) && isset($_POST[
     mkdir($elex_dir, 0755, true);
   }
   $filename = $elex_dir.$county.'.json';
+  if (file_exists($filename)) {
+    rename($filename,$filename.'.old');
+  }
   file_put_contents($filename,$results_string);
 }
 
