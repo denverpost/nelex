@@ -1,9 +1,50 @@
+<?php
+
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+function pretty_dump($var) {
+  echo '<pre>' . var_export($var, true) . '</pre>';
+}
+
+require_once './functions.php';
+$json = false;
+if (isset($_POST['election_date']) && isset($_POST['data_url'])) {
+  $date = (isset($_POST['election_date'])) ? date('Ymd', strtotime($_POST['election_date'])) : false;
+  $url = (isset($_POST['data_url']) && filter_var($_POST['data_url'], FILTER_VALIDATE_URL) ) ? $_POST['data_url'] : false;
+  $url = remove_if_trailing($_POST['data_url'],'#/');
+  $base_url = remove_if_trailing($url,'Web02/');
+  $version_url = $base_url.'current_ver.txt';
+  $current_version = file_get_contents($version_url);
+  $json_url = $base_url.$current_version.'/json/en/summary.json';
+  $json = file_get_contents($json_url);
+  $results_input = json_decode($json, true);
+  $results_output = array();
+  $ct=0;
+  foreach ($results_input as $result) {
+    $results_output[$ct]['race_name'] = $result['C'];
+    foreach ($result['CH'] as $choice) {
+      $results_output[$ct]['race_choices'][] = $choice;
+    }
+    foreach ($result['V'] as $vote) {
+      $results_output[$ct]['race_votes'][] = $vote;
+    }
+    foreach ($result['PCT'] as $percent) {
+      $results_output[$ct]['race_vote_percent'][] = round($percent,2);
+    }
+    $ct++;
+  }
+  pretty_dump($date);
+}
+
+?>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add New Election - Denver Post nelex</title>
+    <title>Convert Election Data - Denver Post nelex</title>
     <meta name="robots" content="noindex, nofollow" />
     <meta name="language" content="en, sv" />
     <meta name="Copyright" content="Copyright &copy; The Denver Post." />
@@ -46,8 +87,9 @@
 
     <div class="row">
       <div class="Large-8 large-centered medium-10 medium-centered columns">
-        <h2>Add/Edit Election</h2>
-          <p>Every election must have a date and a type (general, primary, etc.). You can also choose at this time to make the election "live," which means results will be actively updated ass you add places to track.</p>
+        <h2>Convert Election Data</h2>
+          <p>Paste the URL of a county or state results page and the results will be scraped into a data file. You must choose an election data to associate the data with.</p>
+          <p style="font-style:italic;font-weight:bold;color:darkred;">NOTE: Only URLs with <code>/Web02/</code> or <code>/Web02/#/</code> will work!</p>
       </div>
     </div>
 
@@ -57,18 +99,13 @@
         <div id="theforms" class="row">
           <div class="Large-8 large-centered medium-10 medium-centered columns">
             <fieldset>
-              <legend>Settings</legend>
+              <legend>&nbsp;Data Location&nbsp;</legend>
               <div class="row">
                 <div class="large-2 large-push-1 columns">
-                  <label for="title">Election Type</label>
+                  <label for="data_url">Election Data URL</label>
                 </div>
                 <div class="large-6 large-pull-3 columns">
-                  <select tabindex="1" name="election_type" id="election_type" required>
-                    <option value="general" selected>General</option>
-                    <option value="primary">Primary</option>
-                    <option value="special">Special</option>
-                    <option value="runoff">Runoff</option>
-                  </select>
+                  <input type="test" style="width:100%;" name="data_url" id="data_url" placeholder="http://results.enr.clarityelections.com/..." required />
                 </div>
               </div>
               <div class="row">
@@ -76,28 +113,26 @@
                   <label for="desc">Election Date</label>
                 </div>
                 <div class="large-6 large-pull-3 columns">
-                  <input type="text" tabindex="2" name="election_date" id="election_date" placeholder="00/00/0000" required />
-                </div>
-              </div>
-              <div class="row">
-                <div class="large-2 large-push-1 columns">
-                  <label for="election_live">Status</label>
-                </div>
-                <div class="large-6 large-pull-3 columns">
-                  <div class="row">
-                    <div class="large-1 columns">
-                      <input type="checkbox" tabindex="3" name="election_live" id="election_live" />
-                    </div>
-                  </div>
+                  <select name="election_date" id="election_date" required>
+                    <option value="20180626">2018-06-26</option>
+                  </select>
                 </div>
               </div>
 
               <div class="row">
                 <div class="large-12 columns text-center">
-                  <input type="submit" tabindex="4" class="button large-12 columns" style="margin-top:2em;padding:1em 2em" value="CREATE ELECTION" />
+                  <input type="submit" tabindex="4" class="button large-12 columns" style="margin-top:2em;padding:1em 2em" value="CONVERT DATA" />
                 </div>
               </div>
-            </fieldset>
+            </fieldset><?php if ($json) { ?>
+            <fieldset>
+              <legend>&nbsp;Found the following json:&nbsp;</legend>
+              <div class="row">
+                <div class="large-12 columns text-center">
+                  <textarea style="width:100%;height:24em;" readonly><?php echo $json; ?></textarea>
+                </div>
+              </div>
+            </fieldset><?php } ?>
           </div>
         </div>
     </form>

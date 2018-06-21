@@ -8,6 +8,19 @@ if (!function_exists('get_config')) {
     }
 }
 
+/**
+ * Remove a sub-string, only if it as the end of the parent string
+ */
+if (!function_exists('remove_if_trailing')) {
+    function remove_if_trailing($haystack, $needle) {
+        $needle_position = strlen($needle) * -1;
+        if (substr($haystack, $needle_position) == $needle) {
+             $haystack = substr($haystack, 0, $needle_position);
+        }
+        return $haystack;
+    }
+}
+
 if (!function_exists('titleCase')) {
     function titleCase($string) {
         $smallwordsarray = array('of','a','the','and','an','or','nor','but','is','if','then','else','when','at','from','by','on','off','for','in','out','over','to','into','with');
