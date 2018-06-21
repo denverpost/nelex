@@ -340,7 +340,7 @@ table.lights td span.winner1:after {
 #theforms p {
   line-height:1.4;
 }
-#theforms input, #theforms textarea {
+#theforms input, #theforms textarea, #theforms select {
   display:block;
   width:100%;
   text-align:left;

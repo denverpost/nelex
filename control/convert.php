@@ -9,8 +9,13 @@ function pretty_dump($var) {
 }
 
 require_once './functions.php';
+require_once './counties.php';
+
+$data_path = '../results/';
+
 $json = false;
-if (isset($_POST['election_date']) && isset($_POST['data_url'])) {
+if (isset($_POST['election_date']) && isset($_POST['data_url']) && isset($_POST['election_county'])) {
+  $county = (isset($_POST['election_date'])) ? $_POST['election_county'] : false;
   $date = (isset($_POST['election_date'])) ? date('Ymd', strtotime($_POST['election_date'])) : false;
   $url = (isset($_POST['data_url']) && filter_var($_POST['data_url'], FILTER_VALIDATE_URL) ) ? $_POST['data_url'] : false;
   $url = remove_if_trailing($_POST['data_url'],'#/');
@@ -35,7 +40,13 @@ if (isset($_POST['election_date']) && isset($_POST['data_url'])) {
     }
     $ct++;
   }
-  pretty_dump($date);
+  $results_string = json_encode($results_output);
+  $elex_dir = $data_path.$date.'/';
+  if (!file_exists($elex_dir)) {
+    mkdir($elex_dir, 0755, true);
+  }
+  $filename = $elex_dir.$county.'.json';
+  file_put_contents($filename,$results_string);
 }
 
 ?>
@@ -88,7 +99,7 @@ if (isset($_POST['election_date']) && isset($_POST['data_url'])) {
     <div class="row">
       <div class="Large-8 large-centered medium-10 medium-centered columns">
         <h2>Convert Election Data</h2>
-          <p>Paste the URL of a county or state results page and the results will be scraped into a data file. You must choose an election data to associate the data with.</p>
+          <p>Paste the URL of a county or state results page and the results will be scraped into a data file. You must choose an election date and a county (choose "Colorado" for statewide results) to associate these data with.</p>
           <p style="font-style:italic;font-weight:bold;color:darkred;">NOTE: Only URLs with <code>/Web02/</code> or <code>/Web02/#/</code> will work!</p>
       </div>
     </div>
@@ -110,7 +121,19 @@ if (isset($_POST['election_date']) && isset($_POST['data_url'])) {
               </div>
               <div class="row">
                 <div class="large-2 large-push-1 columns">
-                  <label for="desc">Election Date</label>
+                  <label for="election_county">Election County</label>
+                </div>
+                <div class="large-6 large-pull-3 columns">
+                  <select name="election_county" id="election_county" required>
+                    <?php foreach ($counties as $county) { ?>
+                      <option value="<?php echo strtolower($county); ?>"><?php echo $county; ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="large-2 large-push-1 columns">
+                  <label for="election_date">Election Date</label>
                 </div>
                 <div class="large-6 large-pull-3 columns">
                   <select name="election_date" id="election_date" required>
@@ -124,12 +147,12 @@ if (isset($_POST['election_date']) && isset($_POST['data_url'])) {
                   <input type="submit" tabindex="4" class="button large-12 columns" style="margin-top:2em;padding:1em 2em" value="CONVERT DATA" />
                 </div>
               </div>
-            </fieldset><?php if ($json) { ?>
+            </fieldset><?php if ($results_string) { ?>
             <fieldset>
-              <legend>&nbsp;Found the following json:&nbsp;</legend>
+              <legend>&nbsp;Outputting the following json:&nbsp;</legend>
               <div class="row">
                 <div class="large-12 columns text-center">
-                  <textarea style="width:100%;height:24em;" readonly><?php echo $json; ?></textarea>
+                  <textarea style="width:100%;height:18em;" readonly><?php echo $results_string; ?></textarea>
                 </div>
               </div>
             </fieldset><?php } ?>
