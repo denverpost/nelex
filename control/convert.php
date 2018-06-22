@@ -29,14 +29,14 @@ if (isset($_POST['election_date']) && isset($_POST['data_url']) && isset($_POST[
   $ct=0;
   foreach ($results_input as $result) {
     $results_output[$ct]['race_name'] = $result['C'];
-    foreach ($result['CH'] as $choice) {
-      $results_output[$ct]['race_choices'][] = $choice;
+    foreach ($result['CH'] as $key => $value) {
+      $results_output[$ct]['results'][$key]['choice_name'] = $value;
     }
-    foreach ($result['V'] as $vote) {
-      $results_output[$ct]['race_votes'][] = $vote;
+    foreach ($result['V'] as $key => $value) {
+      $results_output[$ct]['results'][$key]['choice_votes'] = $value;
     }
-    foreach ($result['PCT'] as $percent) {
-      $results_output[$ct]['race_vote_percent'][] = round($percent,2);
+    foreach ($result['PCT'] as $key => $value) {
+      $results_output[$ct]['results'][$key]['choice_vote_percent'] = round($value,2);
     }
     $ct++;
   }
