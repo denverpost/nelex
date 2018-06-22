@@ -187,7 +187,7 @@ $base_description = 'Election results for national, state, county and city elect
 
             <div class="rightRail sidebarcol small-12 large-3 columns" id="rightRail">
 
-                
+
 
                 <div id='dfp-20' class='ad'>
                     <script>
@@ -230,7 +230,7 @@ $base_description = 'Election results for national, state, county and city elect
         </script>
     </div>
     <div id="dfmFooter" style="border-top:1px solid #ddd;"><!--CORPORATE FOOTER--></div>
-    <script src="//extras.denverpost.com/vendor_templates/mason/vendor-include.js"></script>
+    <script src="./js/nav.js"></script>
 
     <footer>
     <!-- START Parse.ly Include: Standard -->
