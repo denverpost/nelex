@@ -182,15 +182,7 @@ $base_description = 'Election results for national, state, county and city elect
 (window,document,'script','dataLayer','GTM-TLFP4R');
 }
 </script><!-- End Google Tag Manager -->
-<div id="fb-root"></div>
-<!-- VENDOR: FACEBOOK -->
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=197097673694469";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+
 <div id="dfmHeader"><!--Header Goes Here--></div>
     <div id="div-gpt-ad-top_leaderboard" class="dfp-ad dfp-top_leaderboard" data-ad-unit="top_leaderboard">
         <script>
@@ -202,14 +194,10 @@ $base_description = 'Election results for national, state, county and city elect
 
     <div id="wrapper" class="body-copy">
 
-        <p id="datestamp" class="stamp"><span>Colorado Bill Tracker, last updated {{''|next_update('this')}}</span></p>
-        {% include 'inc_nav.html' %}
         <div id="breadcrumbs">
-            {% block breadcrumbs %}
             <a href="http://www.denverpost.com/">Home</a>
             &rsaquo; <a href="http://www.denverpost.com/politics/">Politics</a>
             &rsaquo; <a href="http://www.denverpost.com/politics/colorado-legislature/">Legislature</a>
-            {% endblock breadcrumbs %}
         </div>
 
         <div class="row body-copy">
@@ -217,7 +205,8 @@ $base_description = 'Election results for national, state, county and city elect
             <h1><?php echo $base_title; ?></h1>
 
             <div class="maincol small-12 large-9 columns">
-            {% block content %}{% endblock content %}
+
+                <!-- CONTENT HERE -->
 
             <script src="//extras.denverpost.com/app/mailer-rules/mailer.js"></script>
             <link href='//extras.denverpost.com/app/mailer-rules/style.css' rel='stylesheet' type='text/css'>
@@ -293,9 +282,7 @@ $base_description = 'Election results for national, state, county and city elect
     </div><!-- END wrapper -->
 
     <section id="content-footer" class="body-copy">
-        <hr noshade>
-        <p>The latest in <a href="http://www.denverpost.com/politics/colorado-legislature/">Colorado state legislature news</a>: <script src="//extras.denverpost.com/cache/politics_legislature_1.js"></script></p>
-        {% include 'inc_nav.html' %}
+        
     </section>
 
     <div id="div-gpt-ad-bottom_leaderboard" class="dfp-ad dfp-bottom_leaderboard" data-ad-unit="bottom_leaderboard">
@@ -309,37 +296,27 @@ $base_description = 'Election results for national, state, county and city elect
     <script src="//extras.denverpost.com/vendor_templates/mason/vendor-include.js"></script>
 
     <footer>
+    <!-- START Parse.ly Include: Standard -->
+    <div id="parsely-root" style="display: none">
+      <span id="parsely-cfg" data-parsely-site="denverpost.com"></span>
+    </div>
     <script>
-        // VENDOR: CHARTBEAT
-        if ( iframe === '' ) {
-            _sf_async_config.uid = 2671;
-            _sf_async_config.domain = 'denverpost.com';
-            _sf_async_config.sections = 'politics,legislature,data,vendor,';
-            _sf_async_config.useCanonical = true;
-            (function(){
-                function loadChartbeat() {
-                    window._sf_endpt=(new Date()).getTime();
-                    var e = document.createElement('script');
-                    e.setAttribute('src','//static.chartbeat.com/js/chartbeat.js');
-                    document.body.appendChild(e);
-                }
-                var oldonload = window.onload;
-                window.onload = (typeof window.onload != 'function') ? loadChartbeat : function() { oldonload(); loadChartbeat(); };
-            })();
+        if ( iframe === 1 ) {
+            (function(s, p, d) {
+              var h=d.location.protocol, i=p+"-"+s,
+                  e=d.getElementById(i), r=d.getElementById(p+"-root"),
+                  u=h==="https:"?"d1z2jf7jlzjs58.cloudfront.net"
+                  :"static."+p+".com";
+              if (e) return;
+              e = d.createElement(s); e.id = i; e.async = true;
+              e.src = h+"//"+u+"/p.js"; r.appendChild(e);
+            })("script", "parsely", document);
         }
     </script>
-    <p>Copyright &copy; 2015-2017 <a href="http://www.denverpost.com/">The Denver Post</a></p>
-    <p>
-        <a href="http://www.denverpost.com/weather#denver">Denver Weather</a> 
-        &bull; <a href="http://crime.denverpost.com/rockies">Denver Crime Report</a>
-        &bull; <a href="http://www.denverpost.com/sudoku">Sudoku</a>
-        &bull; <a href="http://www.denverpost.com/arcade/ci_26520665/daily-crossword">Daily Crossword</a>
-    </p>
-    <noscript><p id="timestamp" class="stamp">Page generated {{''|timestamp}}</p></noscript>
+    <!-- END Parse.ly Include: Standard -->
     </footer>
     <script>
-    if ( iframe === 1 )
-    {
+    if ( iframe === 1 ) {
         // Loop through all the links and add target="_parent"
         $("a").each(function(index) {
             $(this).attr('target', '_parent');
