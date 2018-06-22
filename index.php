@@ -42,7 +42,7 @@ $base_description = 'Election results for national, state, county and city elect
     <meta property="fb:app_id" content="105517551922"/>
     <meta property="og:title" content="<?php echo $base_title; ?>" />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="<?php echo $base_url; ?>" />a
+    <meta property="og:url" content="<?php echo $base_url; ?>" />
     <meta property="og:image" content="<?php echo $base_url; ?>img/election-results-share.jpg" />
     <meta property="og:site_name" content="The Denver Post" />
     <meta property="og:description" content="<?php echo $base_description; ?>" />
@@ -50,52 +50,28 @@ $base_description = 'Election results for national, state, county and city elect
 
     <meta name="google-site-verification" content="2bKNvyyGh6DUlOvH1PYsmKN4KRlb-0ZI7TvFtuKLeAc" />
 
-    <script>
-        // Only load foundation.css on handheld devices
-        if ( window.screen.availWidth < 769 || window.innerWidth < 769 )
-        {
-            var link = document.createElement( "link" );
-            link.href = "http://cdn.foundation5.zurb.com/foundation.css";
-            link.type = "text/css";
-            link.rel = "stylesheet";
-            link.media = "screen,print";
-            document.getElementsByTagName("head")[0].appendChild(link);
-        }
-    </script>
+    <!-- STYLE SHEETS -->
+    <link rel="stylesheet" href="./css/foundation.min.css" />
+    <link rel="stylesheet" href="./css/normalize.min.css" />
+    <link rel="stylesheet" href="./css/site.css" />
 
-    <link rel="stylesheet" type="text/css" href="<?php echo $base_url; ?>css/site.css">
-    <style type="text/css">
-    dt { float: left; }
-    dt:after { content: ':\00a0'; }
-{% block style %}{% endblock style %}
-    </style>
-
-    
-    <script src="//extras.denverpost.com/media/js/jquery-min.js"></script>
-    <script src="//extras.denverpost.com/media/js/dputils-min.js?v=3"></script>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/modernizr.min.js"></script>
 
     <script>
         var iframe = '', kiosk = '';
         if ( document.location.hash === '#iframe' ) { iframe = 1 }
         if ( window.top !== window.self ) { iframe = 1; }
-        if ( iframe === '' ) {
-            //Chartbeat startup
-            var _sf_startpt=(new Date()).getTime();
-            var _sf_async_config={};
-        }
     </script>
     <script>
         if ( iframe === '' ) {
-        (function() {
-          var useSSL = "https:" == document.location.protocol;
-          var src = (useSSL ? 'https:' : 'http:') + '//www.googletagservices.com/tag/js/gpt.js';
-          document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
-         })();
+            var s = document.createElement("script");
+            s.src = "//www.googletagservices.com/tag/js/gpt.js";
+            $("head").append(s);
         }
     </script>
     <script>
-      if ( typeof googletag !== "undefined" )
-      {
+      if ( typeof googletag !== "undefined" ) {
         googletag.defineSlot('/8013/denverpost.com/News',[[300,250],[300,600],[160,600],[300,1050]], 'dfp-20').addService(googletag.pubads()).setTargeting('pos',['Cube1_RRail_ATF']).setTargeting('kv','politics');                                          
         googletag.defineSlot('/8013/denverpost.com/News',[[300,250]], 'dfp-21').addService(googletag.pubads()).setTargeting('pos',['Cube2_RRail_mid']).setTargeting('kv','politics');
         googletag.defineSlot('/8013/denverpost.com/News',[[300,250]], 'dfp-22').addService(googletag.pubads()).setTargeting('pos',['Cube3_RRail_lower']).setTargeting('kv','politics');
@@ -115,7 +91,6 @@ $base_description = 'Election results for national, state, county and city elect
         googletag.enableServices();
       }
     </script>
-    {% block head %}{% endblock head %}
 </head>
 <body>
 <!-- Google Tag Manager Data Layer -->
@@ -208,51 +183,11 @@ $base_description = 'Election results for national, state, county and city elect
 
                 <!-- CONTENT HERE -->
 
-            <script src="//extras.denverpost.com/app/mailer-rules/mailer.js"></script>
-            <link href='//extras.denverpost.com/app/mailer-rules/style.css' rel='stylesheet' type='text/css'>
-
-            <div id="emailThick">
-                <h2>Send this page to a friend.</h2>
-                <div class="left">
-                    <p></p>
-                </div>
-                <div class="right">
-                    <form action="http://denverpostplus.com/app/mailer-rules/www/" method="post" name="friend" id="friend">
-                        <p id="results"></p>
-                        <input type="hidden" name="keebler" value="goof111" />
-                        <input type="hidden" name="goof111" value="TRUE" />
-                        <input type="hidden" name="redirect" id="inputRedirURL" value="http://extras.denverpost.com/splash/sportsthanks.html" />
-                        <input type="hidden" name="id" value="friendsend" />
-                        <input type="hidden" name="which" value="whatever" />
-                        <input type="hidden" name="url_to_send" value="<?php echo $base_url; ?>" />
-                        <input type="hidden" name="subject" value="A friend wants you to check out <?php echo $base_title; ?>" />
-                        <input type="text" name="name_first" value="Humans: Do Not Use" style="display:none;" />
-                        <input type="text" name="name_first" value="Humans: Do Not Use" style="display:none;" />
-                        <input placeholder="Your Email Address" type="text" name="email_address" maxlength="50" value="" style="width:30%;">
-                        <input placeholder="Your Friend's Email" type="text" name="friend_email_address" maxlength="50" value="" style="width:30%;">
-                        <input type="submit" value="SEND" onClick="form_handler.submit('#friend');">
-                    </form>
-                </div>
-            </div>
-
             </div>
 
             <div class="rightRail sidebarcol small-12 large-3 columns" id="rightRail">
 
-                {% if response.app.page.url %}
-                <div style="margin-bottom:10px;" class="fb-like" data-href="<?php echo $base_url; ?>" data-layout="standard" data-action="like" data-show-faces="false" data-share="true"></div>
-
-                <a href="https://twitter.com/share" class="twitter-share-button" data-via="denverpolitics" data-size="large" data-related="thespot" data-hashtags="coleg" data-dnt="true">Tweet this page</a>
-                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-                {%- endif %}
-
-
-                <h3>Recently in Colorado legislature</h3>
-                <p>
-                    Check out Colorado Bill Tracker's
-                    <a href="<?php echo $base_url; ?>the-week/{{response.app.recent.week}}/">latest week in review (for the week ending {{response.app.recent.week|date_raw|datetime_filter('datefull')}})</a>,
-                    and <a href="<?php echo $base_url; ?>the-day/{{response.app.recent.day}}/">most-recent day in review, for {{response.app.recent.day|date_raw|datetime_filter('datefullweekday')}}</a>.
-                </p>
+                
 
                 <div id='dfp-20' class='ad'>
                     <script>
@@ -260,9 +195,11 @@ $base_description = 'Election results for national, state, county and city elect
                     </script>
                 </div>
 
-                <h3>Colorado legislature news</h3>
-                <script src="//extras.denverpost.com/cache/politics_legislature.js"></script>
-                <noscript><p><a href="http://www.denverpost.com/politics/colorado-legislature/">Recent Colorado legislature headlines</a></p></noscript>
+                <div class="sidebar_headlines">
+                    <h3>Colorado legislature news</h3>
+                    <script src="//extras.denverpost.com/cache/politics_legislature.js"></script>
+                    <noscript><p><a href="http://www.denverpost.com/politics/colorado-legislature/">Recent Colorado legislature headlines</a></p></noscript>
+                </div>
 
                 <div id='dfp-21' class='ad'>
                     <script>
@@ -324,6 +261,12 @@ $base_description = 'Election results for national, state, county and city elect
         // Remove the logo and footer
         $('footer, #dfmHeader, #dfmFooter, #breadcrumbs').remove();
     }
+    var checkExist = setInterval(function() {
+       if ($('#web-push-prompt').length) {
+          $('#web-push-prompt').remove();
+          clearInterval(checkExist);
+       }
+    }, 100);
     </script>
 </body>
 </html>
