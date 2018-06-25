@@ -9,7 +9,7 @@ function pretty_dump($var) {
 }
 
 require_once './functions.php';
-require_once './counties.php';
+require_once '../counties.php';
 
 $data_path = '../results/';
 
@@ -20,6 +20,7 @@ if (isset($_POST['election_date']) && isset($_POST['data_url']) && isset($_POST[
   $url = (isset($_POST['data_url']) && filter_var($_POST['data_url'], FILTER_VALIDATE_URL) ) ? $_POST['data_url'] : false;
   $url = remove_if_trailing($_POST['data_url'],'#/');
   $base_url = remove_if_trailing($url,'Web02/');
+  $base_url = remove_if_trailing($url,'Web02-state/');
   $version_url = $base_url.'current_ver.txt';
   $current_version = file_get_contents($version_url);
   $json_url = $base_url.$current_version.'/json/en/summary.json';
@@ -129,7 +130,7 @@ if (isset($_POST['election_date']) && isset($_POST['data_url']) && isset($_POST[
                 <div class="large-6 large-pull-3 columns">
                   <select name="election_county" id="election_county" required>
                     <?php foreach ($counties as $county) { ?>
-                      <option value="<?php echo strtolower($county); ?>"><?php echo $county; ?></option>
+                      <option value="<?php echo str_replace(' ', '-', strtolower($county)); ?>"><?php echo $county; ?></option>
                     <?php } ?>
                   </select>
                 </div>

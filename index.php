@@ -1,8 +1,55 @@
 <?php
 
+require_once './counties.php';
+
+function get_county_from_slug($cslug) {
+    foreach($counies as $county) {
+        $county_slug = str_replace(' ', '-', strtolower($county));
+        if ($cslug == $county_slug) {
+            return $county;
+        } else {
+            return false;
+        }
+    }
+}
+
+$iframe = (isset($_GET['iframe']) && $_GET['iframe'] == 'true') ? true : false;
+$election_date = (isset($_GET['date']) && ctype_digit($_GET['date'])) ? $_GET['date'] : false;
+$election_county = (isset($_GET['county']) && ctype_alpha($_GET['county'])) ? $_GET['county'] : false;
+$election_county_display = (get_county_from_slug($election_county) && $election_county) ? get_county_from_slug($election_county) : false;
+
 $base_url = 'https://elections.denverpost.com/';
 $base_title = 'Election Results - The Denver Post';
 $base_description = 'Election results for national, state, county and city elections in Colorado from The Denve Post.';
+
+$directories = array();
+if ($results = scandir('./results')) {
+    foreach ($results as $result) {
+        if ($result === '.' || $result === '..' || $result === 'index.php') continue;
+
+        if (is_dir('./results/' . $result)) {
+            $directories[] = $result;
+        }
+    }
+}
+sort($directories, SORT_NATURAL);
+$directories = array_reverse($directories);
+$elections_available = array();
+foreach($directories as $dir) {
+    if ($handle = scandir('./results/'.$dir.'/')) {
+        foreach ($handle as $file) {
+            $filepath = pathinfo($file);
+            if ($file === '.' || $file === '..' || $file === 'index.php' || $filepath['extension'] !== 'json') {
+                continue;
+            } else {
+                $elections_available[$dir][] = $filepath['filename'];
+            }
+        }
+    }
+}
+foreach($directories as $dir) {
+    sort($elections_available[$dir], SORT_NATURAL);
+}
 
 ?><!DOCTYPE HTML>
 <html lang="en">
@@ -59,10 +106,10 @@ $base_description = 'Election results for national, state, county and city elect
     <script src="./js/modernizr.min.js"></script>
 
     <script>
-        var iframe = '', kiosk = '';
-        if ( document.location.hash === '#iframe' ) { iframe = 1 }
-        if ( window.top !== window.self ) { iframe = 1; }
+        var iframe = ( window.top !== window.self ) ? 1 : 0;
     </script>
+    
+    <?php if ($iframe === false) { ?>
     <script>
         if ( iframe === '' ) {
             var s = document.createElement("script");
@@ -70,6 +117,8 @@ $base_description = 'Election results for national, state, county and city elect
             $("head").append(s);
         }
     </script>
+    <?php } ?>
+
     <script>
       if ( typeof googletag !== "undefined" ) {
         googletag.defineSlot('/8013/denverpost.com/News',[[300,250],[300,600],[160,600],[300,1050]], 'dfp-20').addService(googletag.pubads()).setTargeting('pos',['Cube1_RRail_ATF']).setTargeting('kv','politics');                                          
@@ -92,8 +141,9 @@ $base_description = 'Election results for national, state, county and city elect
       }
     </script>
 </head>
-<body>
+<body<?php echo ($iframe) ? ' class="iframe"' : ''; ?>>
 <!-- Google Tag Manager Data Layer -->
+<?php if ($iframe === false) { ?>
   <script>
     var is_mobile = function() {
       var check = false;
@@ -157,6 +207,7 @@ $base_description = 'Election results for national, state, county and city elect
 (window,document,'script','dataLayer','GTM-TLFP4R');
 }
 </script><!-- End Google Tag Manager -->
+<?php } ?>
 
 <div id="dfmHeader"><!--Header Goes Here--></div>
     <div id="div-gpt-ad-top_leaderboard" class="dfp-ad dfp-top_leaderboard" data-ad-unit="top_leaderboard">
@@ -170,17 +221,21 @@ $base_description = 'Election results for national, state, county and city elect
     <div id="wrapper" class="body-copy">
 
         <div id="breadcrumbs">
-            <a href="http://www.denverpost.com/">Home</a>
-            &rsaquo; <a href="http://www.denverpost.com/politics/">Politics</a>
-            &rsaquo; <a href="http://www.denverpost.com/politics/colorado-legislature/">Legislature</a>
+            <a href="https://www.denverpost.com/politics/">Politics</a>
+            &rsaquo; <a href="https://elections.denverpost.com/">Elections</a>
+            <?php if ($election_date) { ?>
+                &rsaquo; <a href="https://elections.denverpost.com/?date=<?php echo $election_date; ?>"><?php echo date('F j, Y',strtotime($election_date)); ?></a>
+                <?php if ($election_county) { ?>
+                &rsaquo; <a href="https://elections.denverpost.com/?date=<?php echo $election_date; ?>&county=<?php echo $election_county_display; ?>"><?php echo $election_county; ?></a>
+                <?php }
+                } ?>
         </div>
 
         <div class="row body-copy">
 
-            <h1><?php echo $base_title; ?></h1>
-
             <div class="maincol small-12 large-9 columns">
 
+                <h1><?php echo $base_title; ?></h1>
                 <!-- CONTENT HERE -->
 
             </div>
@@ -195,10 +250,35 @@ $base_description = 'Election results for national, state, county and city elect
                     </script>
                 </div>
 
+                <div class="sidebar_headlines panel" style="margin-bottom:2em;">
+                    <h4>Jump to results</h4>
+                    <form mathod="get">
+                        <select name="county">
+                            <option value="" disabled<?php echo (!$election_county) ? ' selected' : ''; ?>>Select county...</option>
+                            <option value="colorado">Statewide results</option>
+                            <?php foreach ($counties as $county) {
+                                $countyslug = str_replace(' ', '-', strtolower($county));
+                                $county_selected = ($countyslug === $election_county) ? ' selected' : '';
+                                if ($county !== 'Colorado') { ?>
+                                <option value="<?php echo $countyslug; ?>"<?php echo $county_selected; ?>><?php echo $county; ?></option>
+                                <?php }
+                                } ?>
+                        </select>
+                        <select name="date">
+                            <option value="" disabled<?php echo (!$election_date) ? ' selected' : ''; ?>>Select date...</option>
+                            <?php foreach($directories as $dir) {
+                                $datename = date('F j, Y',strtotime($dir));
+                                $date_selected = ($dir === $election_date) ? ' selected' : '';?>
+                                <option value="<?php echo $dir; ?>"<?php echo $date_selected; ?>><?php echo $datename; ?></option>
+                            <?php } ?>
+                        </select>
+                        <input type="button" onclick="form.submit();" value="Get results!" />
+                    </form>
+                    </div>             
+
                 <div class="sidebar_headlines">
-                    <h3>Colorado legislature news</h3>
+                    <h4>More politics headlines</h4>
                     <script src="//extras.denverpost.com/cache/politics_legislature.js"></script>
-                    <noscript><p><a href="http://www.denverpost.com/politics/colorado-legislature/">Recent Colorado legislature headlines</a></p></noscript>
                 </div>
 
                 <div id='dfp-21' class='ad'>
@@ -237,6 +317,8 @@ $base_description = 'Election results for national, state, county and city elect
     <div id="parsely-root" style="display: none">
       <span id="parsely-cfg" data-parsely-site="denverpost.com"></span>
     </div>
+
+    <?php if ($iframe === false) { ?>
     <script>
         if ( iframe === 1 ) {
             (function(s, p, d) {
@@ -251,7 +333,10 @@ $base_description = 'Election results for national, state, county and city elect
         }
     </script>
     <!-- END Parse.ly Include: Standard -->
+    <?php } ?>
+
     </footer>
+    
     <script>
     if ( iframe === 1 ) {
         // Loop through all the links and add target="_parent"
