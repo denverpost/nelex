@@ -126,6 +126,17 @@ h6 {
 
 #breadcrumbs {
     margin-bottom: .5em;
+    clear: both;
+    text-transform: uppercase;
+    font: normal 700 1em/1.375 Source Sans Pro, Helvetica, sans-serif;
+}
+#breadcrumbs a {
+    display: inline-block;
+    text-decoration: none;
+    color:#8e1024;
+}
+#breadcrumbs a:hover {
+    color:#222;
 }
 
 .maincol {
@@ -141,6 +152,11 @@ form select,
 form input[type=button] {
     margin-top: .5em;
     font-size: 1.2rem;
+}
+
+form select.disabled-grey {
+    border-color:#aaa;
+    color:#ccc;
 }
 
 div.colophon {
