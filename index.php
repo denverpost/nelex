@@ -78,7 +78,7 @@ if ($election_date) {
     <meta name="language" content="en, sv" />
     <meta name="Copyright" content="Copyright &copy; The Denver Post." />
 
-    <meta name="description" content="Election results for national, state, county and city elections in Colorado from The Denve Post.">
+    <meta name="description" content="Election results for national, state, county and city elections in Colorado from The Denver Post.">
     <meta name="news_keywords" content="election,results,votes,candidates,politics,colorado,legislature,governor,secretary">
 
     <meta name="twitter:card" value="summary" />
@@ -111,9 +111,11 @@ if ($election_date) {
     <link rel="stylesheet" href="./css/foundation.min.css" />
     <link rel="stylesheet" href="./css/normalize.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 
     <script src="./js/jquery.min.js"></script>
     <script src="./js/modernizr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
     <script>
         var datafile = <?php echo ($datafile_address) ? "'".$datafile_address."'" : 'false'; ?>;
     </script>
@@ -249,9 +251,59 @@ if ($election_date) {
             <div class="maincol small-12 large-9 columns">
 
                 <h1><?php echo $base_title; ?></h1>
-                <!-- CONTENT HERE -->
+                <!-- RESULTS TABLE STARTS HERE -->
+                <div class="row">                    
+                    <div id="results-container" class="large-10 large-centered columns"></div>
+                </div>
+
+                <script id="results-template" type="text/x-handlebars-template">
+                    {{#each this}}
+                    <h3 class="race-title">{{race_name}}</h3> {{#eachByVotePct results "choice_vote_percent"}}
+                    <table class="fixed-width">
+                        <tbody>
+                            <tr>
+                                <td class="table-data">{{choice_name}}</td><td class="table-data">{{choice_vote_percent}}%</td>
+                                <td class="table-data">
+                                    <div class="bar-background">
+                                        <div class="bar-percentage" style="width:{{choice_vote_percent}}%"></div>
+                                    </div>
+                                </td>
+                                <td class="table-data">{{formatNumber choice_votes}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    {{/eachByVotePct}} {{/each}}
+                    </div>
+                </script>
+                <script>
+                    //if (datafile != false) { 
+                        $.getJSON("./html_framework/results.json", function(data) {
+                            $(document).ready(function() {
+                                // Helper for formatting vote totals
+                                Handlebars.registerHelper('formatNumber', function(value) {
+                                    return value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "1,");
+                                });
+                                // Helper for sorting by vote percentage
+                                Handlebars.registerHelper('eachByVotePct', function(context,array_key,options){
+                                    var output = '';
+                                    var contextSorted = context.concat()
+                                        .sort( function(a,b) { return b[array_key] - a[array_key] } );
+                                    for(var i=0, j=contextSorted.length; i<j; i++) {
+                                        output += options.fn(contextSorted[i]);
+                                    }
+                                    return output;
+                                });
+                                var source = $("#results-template").html();
+                                var template = Handlebars.compile(source);
+                                var html = template(data);
+                                $('#results-container').html(html);
+                            })
+                        })
+                    //};
+                </script>
 
             </div>
+            <!-- RESULTS TABLE ENDS HERE -->
 
             <div class="rightRail sidebarcol small-12 large-3 columns" id="rightRail">
 

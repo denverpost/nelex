@@ -1,8 +1,80 @@
-body.iframe {
-    margin:0;
-    padding:0;
-    width:100%;
+/* Handlebars table */
+
+#results-container {
+    font-family: "Roboto", sans-serif;
+    color: #585858;
 }
+
+.race-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 13px !important;
+    margin-top: 30px !important;
+    font-family: "Roboto", sans-serif;
+    /* color: #585858; */
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fafafa;
+    font-family: "Roboto", sans-serif;
+    color: #585858;
+}
+
+th {
+    font-size: .8rem;
+    color: #d9d9d9;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.table-data {
+    padding: 4px;
+    border-bottom: 1px dotted #ccc;
+}
+
+.fixed-width td:nth-child(1) {
+    width: 28%;
+}
+
+.fixed-width td:nth-child(2) {
+    width: 22%;
+    font-size: .9rem;
+    font-weight: 700;
+}
+
+.fixed-width td:nth-child(3) {
+    width: 28%;
+}
+
+.fixed-width td:nth-child(4) {
+    width: 22%;
+    font-size: .9rem;
+    text-align: left;
+    padding-left: 15px;
+}
+
+.bar-background {
+    width: 100%;
+    background-color: #d9d9d9;
+}
+
+.bar-percentage {
+    height: 20px;
+    background-color: #807dba;
+}
+
+
+/* End Handlebar table styles */
+
+body.iframe {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
 body.iframe div#dfmHeader,
 body.iframe div#div-gpt-ad-top_leaderboard,
 body.iframe div#breadcrumbs,
@@ -11,45 +83,70 @@ body.iframe section#content-footer,
 body.iframe div#div-gpt-ad-bottom_leaderboard,
 body.iframe div#dfmFooter,
 body.iframe div.rightRail.sidebarcol {
-    display:none!important;
+    display: none!important;
 }
+
 body.iframe div#wrapper,
 body.iframe div#wrapper div.body-copy,
 body.iframe div#wrapper div.maincol {
-    margin:0!important;
-    padding:0!important;
+    margin: 0!important;
+    padding: 0!important;
 }
-body { margin:0; }
+
+body {
+    margin: 0;
+}
+
 #wrapper {
-    max-width:78rem;
-    margin:1rem auto;
-    font-family: "Source Serif Pro",Times,Georgia,serif;
+    max-width: 78rem;
+    margin: 1rem auto;
+    font-family: "Source Serif Pro", Times, Georgia, serif;
 }
-h1, h2, h3, h4, h5, h6, p, li {
-    font-family: "Source Serif Pro",Times,Georgia,serif;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li {
+    font-family: "Source Serif Pro", Times, Georgia, serif;
 }
-h1, h2, h3, h4, h5, h6 {
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-weight: bold;
-    line-height:1.1;
+    line-height: 1.1;
 }
+
 #breadcrumbs {
-    margin-bottom:.5em;
+    margin-bottom: .5em;
 }
+
 .maincol {
     padding-left: 0;
 }
+
 #dfmEndFooterLinks ul li {
-    list-style-type:none;
-    margin-left:15px!important;
+    list-style-type: none;
+    margin-left: 15px!important;
 }
+
 form select,
 form input[type=button] {
-    margin-top:.5em;
-    font-size:1.2rem;
+    margin-top: .5em;
+    font-size: 1.2rem;
 }
+
 div.colophon {
-    text-align:center!important;
+    text-align: center!important;
 }
+
 ul#footer-bottom-menu {
     margin: 0 auto 1.0625rem auto;
     margin-left: -1.375rem;
@@ -59,54 +156,96 @@ ul#footer-bottom-menu {
     overflow: hidden;
     display: inline-block;
 }
+
 ul#footer-bottom-menu>li {
     list-style: none;
     float: left;
     margin-left: 1.375rem;
     display: block;
 }
+
 .trending-bar .trending-bar-wrapper>p.label {
     background-color: transparent;
-    padding:0;
-    font-family: "Source Sans Pro",Helvetica,sans-serif;
+    padding: 0;
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
 }
-.dfp-ad.dfp-bottom_leaderboard, .dfp-ad.dfp-top_leaderboard {
+
+.dfp-ad.dfp-bottom_leaderboard,
+.dfp-ad.dfp-top_leaderboard {
     background-color: transparent!important;
-    border:none!important;
-    width:100%!important;
+    border: none!important;
+    width: 100%!important;
     text-align: center;
 }
+
 .sidebar_headlines ul {
-    margin:1em 0!important;
+    margin: 1em 0!important;
 }
+
 .sidebar_headlines ul li {
-    list-style-type: none; 
-    font-size:1.1rem;
+    list-style-type: none;
+    font-size: 1.1rem;
     line-height: 1.4;
-    margin-bottom:.65em;
+    margin-bottom: .65em;
 }
+
 body #wrapper * a {
     border-bottom: none;
 }
+
 .sidebar_headlines ul li span.feed_timestamp {
-    font-size:80%;
-    color:#595959;
+    font-size: 80%;
+    color: #595959;
 }
+
 @media only screen and (max-width: 768px) {
     /* Kill the nav */
-    #dfmEndFooterLinks, #dfmHeader div.foot, #dfmHeader div.sub-navigation, #dfmHeader #dfmMasthead #dfmPageTitle, #dfmHeader #dfmMasthead #dfmSearch, #dfmHeader #dfmMasthead #weatherBoxReal, #dfmHeader iframe, #leaderBoardAd { display:none!important; }
-    #dfmMasthead { height:40px!important; }
-    #dfmHeader #dfmMasthead h3 { margin-left:.5em; }
-    #dfmHeader div.page-head div.body { background:none; border:none; }
-    #dfmHeader div.page-head div.body div.margin { width:100%; }
-    #wrapper { width:100%; overflow:hidden; margin: .5em; }
-    #top_leaderboard_wrap { display: none; }
+    #dfmEndFooterLinks,
+    #dfmHeader div.foot,
+    #dfmHeader div.sub-navigation,
+    #dfmHeader #dfmMasthead #dfmPageTitle,
+    #dfmHeader #dfmMasthead #dfmSearch,
+    #dfmHeader #dfmMasthead #weatherBoxReal,
+    #dfmHeader iframe,
+    #leaderBoardAd {
+        display: none!important;
+    }
+    #dfmMasthead {
+        height: 40px!important;
+    }
+    #dfmHeader #dfmMasthead h3 {
+        margin-left: .5em;
+    }
+    #dfmHeader div.page-head div.body {
+        background: none;
+        border: none;
+    }
+    #dfmHeader div.page-head div.body div.margin {
+        width: 100%;
+    }
+    #wrapper {
+        width: 100%;
+        overflow: hidden;
+        margin: .5em;
+    }
+    #top_leaderboard_wrap {
+        display: none;
+    }
 
     /* Adjust the layout */
-    .adElement { width: 100%!important; }
-    body h1, body h2, body h3, body h4, body h5, body h6 { line-height: 1; }
-    body h1 { 
-        width: 100%!important; 
+    .adElement {
+        width: 100%!important;
+    }
+    body h1,
+    body h2,
+    body h3,
+    body h4,
+    body h5,
+    body h6 {
+        line-height: 1;
+    }
+    body h1 {
+        width: 100%!important;
         font-size: 2em!important;
     }
 
@@ -119,20 +258,30 @@ body #wrapper * a {
     }
 
     /* Tweaks to align rows and make things clickable */
-    div.body { height: 30px; }
-    body dl dt { margin-bottom: 0.75rem; }
-    .maincol, .sidebarcol { clear: both; }
+    div.body {
+        height: 30px;
+    }
+    body dl dt {
+        margin-bottom: 0.75rem;
+    }
+    .maincol,
+    .sidebarcol {
+        clear: both;
+    }
 
     /* Fix line-height on breadcrumbs */
-    #breadcrumbs { line-height: 14px; 
+    #breadcrumbs {
+        line-height: 14px;
         margin-bottom: 10px;
     }
     /* Fix line-height on nav */
-    nav ul { line-height: 0; 
+    nav ul {
+        line-height: 0;
         margin-bottom: 5px;
     }
     /* More line-height fixes */
-    .stamp { margin-top: 10px;
+    .stamp {
+        margin-top: 10px;
     }
     /* We want bullets on list items on mobile to make lists more readable. */
     .row ul {
@@ -141,28 +290,51 @@ body #wrapper * a {
     }
 }
 
-footer { clear: both; }
-footer p, #content-footer p { text-align: center; }
-h3 { margin-top: 15px; }
+footer {
+    clear: both;
+}
+
+footer p,
+#content-footer p {
+    text-align: center;
+}
+
+h3 {
+    margin-top: 15px;
+}
+
 hr {
     width: 80%;
     margin: 8px auto;
 }
-.ad { margin-bottom: 10px; }
-.row { margin-left: 0; }
+
+.ad {
+    margin-bottom: 10px;
+}
+
+.row {
+    margin-left: 0;
+}
+
 #wrapper nav {
     clear: both;
 }
-#wrapper nav ul li, #content-footer nav ul li {
+
+#wrapper nav ul li,
+#content-footer nav ul li {
     display: inline;
 }
+
 #wrapper nav ul li:after {
     content: " ~ ";
 }
+
 #wrapper nav ul li:last-child:after {
     content: "";
 }
-.stamp, #wrapper nav {
+
+.stamp,
+#wrapper nav {
     font-family: Georgia, serif;
     font-style: italic;
     color: #aaa;
@@ -170,10 +342,13 @@ hr {
     width: 100%;
     line-height: 0.5;
 }
-.stamp span, #wrapper nav ul span {
+
+.stamp span,
+#wrapper nav ul span {
     display: inline-block;
-    position: relative;  
+    position: relative;
 }
+
 .stamp span:before,
 .stamp span:after,
 #wrapper nav ul:before,
@@ -186,16 +361,20 @@ hr {
     top: 0;
     width: 500px;
 }
+
 .stamp span:before,
 #wrapper nav ul:before {
     right: 100%;
     margin-right: 15px;
 }
+
 .stamp span:after,
 #wrapper nav ul:after {
     left: 100%;
     margin-left: 15px;
 }
+
+
 
 /*
 #content-footer nav { 
@@ -204,52 +383,80 @@ hr {
     padding: 0;
 }
 */
+
 #content-footer nav ul:before,
-#content-footer nav ul:after 
-{
+#content-footer nav ul:after {
     border: 0px none;
 }
 
-h1 a, h2 a, h3 a, h4 a, h5 a {
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a {
     text-decoration: underline;
 }
+
 @media only screen and (min-width: 769px) {
-.maincol {
-    width: 650px;
-    float: left;
+    .maincol {
+        width: 650px;
+        float: left;
+    }
+    .sidebarcol {
+        width: 300px;
+        float: right;
+        margin-left: 15px;
+    }
 }
-.sidebarcol {
-    width: 300px;
-    float: right;
-    margin-left: 15px;
-}
-}
+
+
 
 
 /* In-page permalink styles */
+
 h1 .intralink,
 h2 .intralink,
 h3 .intralink,
 h4 .intralink,
 h5 .intralink,
-h6 .intralink {color:#000;vertical-align:middle;visibility:hidden; margin-left:-20px;}
+h6 .intralink {
+    color: #000;
+    vertical-align: middle;
+    visibility: hidden;
+    margin-left: -20px;
+}
+
 h1:hover .anchor,
 h2:hover .anchor,
 h3:hover .anchor,
 h4:hover .anchor,
 h5:hover .anchor,
-h6:hover .anchor {text-decoration:none;}
+h6:hover .anchor {
+    text-decoration: none;
+}
+
 h1:hover .anchor .intralink,
 h2:hover .anchor .intralink,
 h3:hover .anchor .intralink,
 h4:hover .anchor .intralink,
 h5:hover .anchor .intralink,
-h6:hover .anchor .intralink {visibility:visible;}
+h6:hover .anchor .intralink {
+    visibility: visible;
+}
+
+
 
 
 /* Styles to make the mason CSS work */
+
 #wrapper h2,
 #wrapper h3,
-#wrapper h4 { margin-bottom: 0.1em; margin-top: 0.5em; }
+#wrapper h4 {
+    margin-bottom: 0.1em;
+    margin-top: 0.5em;
+}
+
 #wrapper ul,
-#wrapper ol { margin-left: 1em; }
+#wrapper ol {
+    margin-left: 1em;
+}
