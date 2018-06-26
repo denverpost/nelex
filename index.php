@@ -51,6 +51,16 @@ foreach($directories as $dir) {
     sort($elections_available[$dir], SORT_NATURAL);
 }
 
+$datafile_address = false;
+if ($election_date) {
+    $datafile_address = './results/'.$election_date.'/';
+    if ($election_county) {
+        $datafile_address .= $election_county.'.json';
+    } else {
+        $datafile_address .= 'colorado.json';
+    }
+}
+
 ?><!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -104,6 +114,9 @@ foreach($directories as $dir) {
 
     <script src="./js/jquery.min.js"></script>
     <script src="./js/modernizr.min.js"></script>
+    <script>
+        var datafile = <?php echo ($datafile_address) ? "'".$datafile_address."'" : 'false'; ?>;
+    </script>
 
     <script>
         var iframe = ( window.top !== window.self ) ? 1 : 0;
