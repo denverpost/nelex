@@ -390,16 +390,6 @@ hr {
     margin-left: 15px;
 }
 
-
-
-/*
-#content-footer nav { 
-    width:30%;
-    margin: 0;
-    padding: 0;
-}
-*/
-
 #content-footer nav ul:before,
 #content-footer nav ul:after {
     border: 0px none;
@@ -412,22 +402,6 @@ h4 a,
 h5 a {
     text-decoration: underline;
 }
-
-@media only screen and (min-width: 769px) {
-    .maincol {
-        width: 650px;
-        float: left;
-    }
-    .sidebarcol {
-        width: 300px;
-        float: right;
-        margin-left: 15px;
-    }
-}
-
-
-
-
 /* In-page permalink styles */
 
 h1 .intralink,
@@ -459,9 +433,6 @@ h5:hover .anchor .intralink,
 h6:hover .anchor .intralink {
     visibility: visible;
 }
-
-
-
 
 /* Styles to make the mason CSS work */
 
