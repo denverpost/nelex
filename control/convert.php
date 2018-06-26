@@ -51,6 +51,7 @@ if (isset($_POST['election_date']) && isset($_POST['data_url']) && isset($_POST[
     rename($filename,$filename.'.old');
   }
   file_put_contents($filename,$results_string);
+  chmod($filename, 0755);
 }
 
 ?>
