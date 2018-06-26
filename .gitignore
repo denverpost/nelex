@@ -1,5 +1,7 @@
 !.gitignore
 .DS_Store
+.htaccess
 constants.php
 results/*
 control/urls.csv
+control/.htaccess
