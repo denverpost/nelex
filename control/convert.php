@@ -19,9 +19,26 @@ if (isset($_POST['election_date']) && isset($_POST['data_url']) && isset($_POST[
   $date = (isset($_POST['election_date'])) ? date('Ymd', strtotime($_POST['election_date'])) : false;
   $url = (isset($_POST['data_url']) && filter_var($_POST['data_url'], FILTER_VALIDATE_URL) ) ? $_POST['data_url'] : false;
   $url = remove_if_trailing($_POST['data_url'],'#/');
-  $alt_url = preg_replace('/Web02\.[0-9]{6}/', 'Web02', $url);
-  $base_url = remove_if_trailing($alt_url,'Web02/');
+  $url = preg_replace('/Web02\.[0-9]{6}/', 'Web02', $url);
+  $url = preg_replace('/Web02-state\.[0-9]{6}/', 'Web02-state', $url);
+  $base_url = remove_if_trailing($url,'Web02/');
   $base_url = remove_if_trailing($base_url,'Web02-state/');
+
+  $handle = fopen('urls.csv', 'r');
+  $url_exists = false;
+  if ($handle) {
+      while (($line = fgets($handle)) !== false) {
+          if ($date.','.$county.','.$base_url == $line) {
+            $url_exists = true;
+            break;
+          }
+      }
+      fclose($handle);
+      if (!$url_exists) {
+        file_put_contents('urls.csv', $date.','.$county.','.$base_url."\n", FILE_APPEND);
+      }
+  }
+
   $version_url = $base_url.'current_ver.txt';
   $current_version = file_get_contents($version_url);
   $json_url = $base_url.$current_version.'/json/en/summary.json';
