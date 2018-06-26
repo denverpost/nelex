@@ -190,22 +190,22 @@ $elex_available = json_encode($elections_available);
         'comscore':'6035443',
         'errorType':'',
         'Publisher Domain':'denverpost.com',
-        'Publisher Product':'extras.denverpost.com',
+        'Publisher Product':'elections.denverpost.com',
         'Dateline':'',
         'Publish Hour of Day':'',
         'Create Hour of Day':'',
         'Update Hour of Day':'',
         'Behind Paywall':'NO',
         'Mobile Presentation':is_mobile(),
-        'kv':'Colorado Legislature',
+        'kv':'Colorado Elections',
         'Release Version':'',
         'Digital Publisher':'Denver Post',
         'Platform':'custom',
-        'Section':'Colorado Legislature',
+        'Section':'Colorado Elections',
         'Taxonomy1':'News',
         'Taxonomy2':'Politics',
-        'Taxonomy3':'Legislature',
-        'Taxonomy4':'',
+        'Taxonomy3':'Elections',
+        'Taxonomy4':'Results',
         'Taxonomy5':'',
         'Content Source':'',
         'Canonical URL': '',
@@ -420,6 +420,8 @@ $elex_available = json_encode($elections_available);
           clearInterval(checkExist);
        }
     }, 100);
+    </script>
+    <script>
     function titleCaseCounty(str) {
       str = str.toLowerCase().split('-');
       for (var i = 0; i < str.length; i++) {
@@ -427,7 +429,7 @@ $elex_available = json_encode($elections_available);
       }
       return str.join(' ');
     }
-    $('#date_select').on('change', function(){
+    function getAvailableCounties() {
         var date_sel = $('#date_select').val().toString();
         if (elex_available[date_sel].length > 0) {
             $('#county_select').removeAttr('disabled');
@@ -438,12 +440,22 @@ $elex_available = json_encode($elections_available);
             $('#county_select').append(html_statewide);
         }
         elex_available[date_sel].forEach(function(county_slug){
-            if (county_slug !== 'colorado') {
+            if (county_slug !== 'colorado' && county_slug !== 'default') {
                 var county_name = titleCaseCounty(county_slug);
                 var html_output = '<option value="' + county_slug + '">' + county_name + '</option>';
                 $('#county_select').append(html_output);
             }
         });
+    }
+
+    $('#date_select').on('change', function(){
+        getAvailableCounties();
+    });
+    $(document).ready(function(){
+        console.log($('#date_select').val());
+        if($('#date_select').val() != '') {
+            getAvailableCounties(); 
+        }
     });
     </script>
 </body>
