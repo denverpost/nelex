@@ -13,7 +13,7 @@ require_once '../counties.php';
 
 $data_path = '../results/';
 
-$json = false;
+$json = $results_string = false;
 if (isset($_POST['election_date']) && isset($_POST['data_url']) && isset($_POST['election_county'])) {
   $county = (isset($_POST['election_date'])) ? $_POST['election_county'] : false;
   $date = (isset($_POST['election_date'])) ? date('Ymd', strtotime($_POST['election_date'])) : false;
