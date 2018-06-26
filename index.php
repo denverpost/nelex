@@ -14,7 +14,7 @@ function get_county_from_slug($cslug,$counties) {
 }
 
 $iframe = (isset($_GET['iframe']) && $_GET['iframe'] == 'true') ? true : false;
-$election_date = (isset($_GET['date']) && ctype_digit($_GET['date'])) ? $_GET['date'] : false;
+$election_date = (isset($_GET['date']) && ctype_digit($_GET['date'])) ? $_GET['date'] : '20180626';
 $election_county = (isset($_GET['county']) && ctype_alpha($_GET['county'])) ? $_GET['county'] : false;
 $election_county_display = (get_county_from_slug($election_county,$counties) && $election_county) ? get_county_from_slug($election_county,$counties) : false;
 
@@ -57,7 +57,11 @@ if ($election_date) {
     if ($election_county) {
         $datafile_address .= $election_county.'.json';
     } else {
-        $datafile_address .= 'colorado.json';
+        if (file_exists('./results/'.$election_date.'/default.json')) {
+            $datafile_address .= 'default.json';
+        } else {
+            $datafile_address .= 'colorado.json';
+        }
     }
 }
 
