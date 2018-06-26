@@ -266,7 +266,7 @@ $elex_available = json_encode($elections_available);
                 <script id="results-template" type="text/x-handlebars-template">
                     {{#each this}}
                     <h3 class="race-title">{{race_name}}</h3> {{#eachByVotePct results "choice_vote_percent"}}
-                    <table class="fixed-width">
+                    <table id="results-table" class="fixed-width">
                         <tbody>
                             <tr>
                                 <td class="table-data">{{choice_name}}</td><td class="table-data">{{choice_vote_percent}}%</td>
@@ -283,8 +283,8 @@ $elex_available = json_encode($elections_available);
                     </div>
                 </script>
                 <script>
-                    //if (datafile !== 'false') { 
-                        $.getJSON("./html_framework/results.json", function(data) {
+                    if (datafile !== 'false') { 
+                        $.getJSON(datafile, function(data) {
                             $(document).ready(function() {
                                 // Helper for formatting vote totals
                                 Handlebars.registerHelper('formatNumber', function(value) {
@@ -306,7 +306,7 @@ $elex_available = json_encode($elections_available);
                                 $('#results-container').html(html);
                             })
                         })
-                    //};
+                    };
                 </script>
 
             </div>
