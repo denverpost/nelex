@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <title>Colorado Primary Election Results</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+    <style>
+    #results-container {
+        font-family: "Roboto", sans-serif;
+        color: #585858;
+    }
+
+    .race-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+        margin-top: 30px;
+    }
+
+    table {
+        table-layout: fixed;
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th {
+        font-size: .8rem;
+        color: #d9d9d9;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    td {
+        padding: 2px;
+        border-bottom: 1px dotted #ddd;
+    }
+
+    .fixed-width td:nth-child(1) {
+        width: 22%;
+        font-size: .9rem;
+        font-weight: 700;
+    }
+
+    .fixed-width td:nth-child(2) {
+        width: 28%;
+    }
+
+    .fixed-width td:nth-child(3) {
+        width: 22%;
+        font-size: .9rem;
+        text-align: left;
+        padding-left: 10px;
+    }
+
+    .fixed-width td:nth-child(4) {
+        width: 28%;
+    }
+
+    .bar-background {
+        width: 100%;
+        background-color: #d9d9d9;
+    }
+
+    .bar-percentage {
+        height: 20px;
+        background-color: #807dba;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="results-container"></div>
+    <script id="results-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <h3 class="race-title">{{race_name}}</h3> {{#results}}
+        <table class="fixed-width">
+            <tbody>
+                <tr>
+                    <td>{{choice_vote_percent}}%</td>
+                    <td>{{choice_name}}</td>
+                    <td>{{formatNumber choice_votes}}</td>
+                    <td>
+                        <div class="bar-background">
+                            <div class="bar-percentage" style="width:{{choice_vote_percent}}%"></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        {{/results}} {{/each}}
+        </div>
+    </script>
+    <script>
+    $.getJSON("results.json", function(data) {
+        $(document).ready(function() {
+            // Helper for formatting vote totals
+            Handlebars.registerHelper('formatNumber', function(value) {
+                return value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "1,");
+            });
+            var source = $("#results-template").html();
+            var template = Handlebars.compile(source);
+            var html = template(data);
+            $('#results-container').html(html);
+        })
+    });
+    </script>
+</body>
+
+</html>
