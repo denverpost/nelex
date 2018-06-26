@@ -1,48 +1,44 @@
 /* Handlebars table */
 
 #results-container {
-    font-family: "Roboto", sans-serif;
+    font-family: "Roboto", sans-serif !important;
     color: #585858;
 }
 
 .race-title {
-    font-size: 1.1rem;
-    font-weight: 700;
+    font-size: 1.6rem !important;
+    line-height: 1.1 !important;
+    font-weight: 700 !important;
     margin-bottom: 13px !important;
-    margin-top: 30px !important;
-    font-family: "Roboto", sans-serif;
+    margin-top: 40px !important;
+    font-family: "Roboto", sans-serif !important;
     /* color: #585858; */
 }
 
-table {
+#results-table {
     table-layout: fixed;
     width: 100%;
     border-collapse: collapse;
     background-color: #fafafa;
-    font-family: "Roboto", sans-serif;
-    color: #585858;
-}
-
-th {
-    font-size: .8rem;
-    color: #d9d9d9;
-    text-align: center;
-    text-transform: uppercase;
+    font-family: "Roboto", sans-serif !important;
+    color: #222;
 }
 
 .table-data {
-    padding: 4px;
-    border-bottom: 1px dotted #ccc;
+    padding: 5px;
+    border-bottom: 1px dashed #ccc;
 }
 
 .fixed-width td:nth-child(1) {
     width: 28%;
+    font-size: .95rem;
 }
 
 .fixed-width td:nth-child(2) {
     width: 22%;
-    font-size: .9rem;
+    font-size: .95rem;
     font-weight: 700;
+    padding-left: 8px;
 }
 
 .fixed-width td:nth-child(3) {
@@ -51,7 +47,7 @@ th {
 
 .fixed-width td:nth-child(4) {
     width: 22%;
-    font-size: .9rem;
+    font-size: .95rem;
     text-align: left;
     padding-left: 15px;
 }
@@ -63,7 +59,8 @@ th {
 
 .bar-percentage {
     height: 20px;
-    background-color: #807dba;
+    /*background-color: #214a74;*/
+    background-color: #006d2c;
 }
 
 
