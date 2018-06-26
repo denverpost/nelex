@@ -28,7 +28,7 @@ if (isset($_POST['election_date']) && isset($_POST['data_url']) && isset($_POST[
   $url_exists = false;
   if ($handle) {
       while (($line = fgets($handle)) !== false) {
-          if ($date.','.$county.','.$base_url == $line) {
+          if ($date.','.$county.','.$base_url == trim($line)) {
             $url_exists = true;
             break;
           }
