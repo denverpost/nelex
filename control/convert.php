@@ -47,7 +47,7 @@ if (isset($_POST['election_date']) && isset($_POST['data_url']) && isset($_POST[
   $results_output = array();
   $ct=0;
   foreach ($results_input as $result) {
-    $results_output[$ct]['race_name'] = $result['C'];
+    $results_output[$ct]['race_name'] = titleCase($result['C']);
     foreach ($result['CH'] as $key => $value) {
       $results_output[$ct]['results'][$key]['choice_name'] = $value;
     }

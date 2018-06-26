@@ -1,6 +1,46 @@
 <?php
 
+require_once './functions.php';
+
 $data_path = '../results/';
+
+function makeDefault($data,$data_date) {
+  $default_output = array();
+    $ct=0;
+    $big_races = array(
+      'governor - democratic party',
+      'governor - republican party'
+    );
+    foreach ($data as $result) {
+      if (in_array(strtolower($result['C']), $big_races)) {
+        echo "\n".'Found races to write DEFAULT results!'."\n\n";
+        $default_output[$ct]['race_name'] = titleCase($result['C']);
+        foreach ($result['CH'] as $key => $value) {
+          $default_output[$ct]['results'][$key]['choice_name'] = $value;
+        }
+        foreach ($result['V'] as $key => $value) {
+          $default_output[$ct]['results'][$key]['choice_votes'] = $value;
+        }
+        foreach ($result['PCT'] as $key => $value) {
+          $default_output[$ct]['results'][$key]['choice_vote_percent'] = round($value,2);
+        }
+      }
+      $ct++;
+    }
+    $default_string = json_encode($default_output);
+    $elex_dir = '../results/'.$data_date.'/';
+    if (!file_exists($elex_dir)) {
+      mkdir($elex_dir, 0755, true);
+    }
+    $default_filename = $elex_dir.'default.json';
+    if (file_exists($default_filename)) {
+      echo 'Backing up prior DEFAULT results!'."\n";
+      rename($default_filename,$default_filename.'.old');
+    }
+    echo 'Writing new DEFAULT results!'."\n\n";
+    file_put_contents($default_filename,$default_string);
+    chmod($default_filename, 0755);
+}
 
 $handle = fopen('urls.csv', 'r');
 $urls = array();
@@ -26,10 +66,13 @@ foreach($urls as $url) {
 
     $json = file_get_contents($json_url);
     $results_input = json_decode($json, true);
+    if ($url['county'] == 'colorado') {
+      makeDefault($results_input,$url['date']);
+    }
     $results_output = array();
     $ct=0;
     foreach ($results_input as $result) {
-      $results_output[$ct]['race_name'] = $result['C'];
+      $results_output[$ct]['race_name'] = titleCase($result['C']);
       foreach ($result['CH'] as $key => $value) {
         $results_output[$ct]['results'][$key]['choice_name'] = $value;
       }
