@@ -19,8 +19,9 @@ if (isset($_POST['election_date']) && isset($_POST['data_url']) && isset($_POST[
   $date = (isset($_POST['election_date'])) ? date('Ymd', strtotime($_POST['election_date'])) : false;
   $url = (isset($_POST['data_url']) && filter_var($_POST['data_url'], FILTER_VALIDATE_URL) ) ? $_POST['data_url'] : false;
   $url = remove_if_trailing($_POST['data_url'],'#/');
-  $base_url = remove_if_trailing($url,'Web02/');
-  $base_url = remove_if_trailing($url,'Web02-state/');
+  $alt_url = preg_replace('/Web02\.[0-9]{6}/', 'Web02', $url);
+  $base_url = remove_if_trailing($alt_url,'Web02/');
+  $base_url = remove_if_trailing($base_url,'Web02-state/');
   $version_url = $base_url.'current_ver.txt';
   $current_version = file_get_contents($version_url);
   $json_url = $base_url.$current_version.'/json/en/summary.json';
@@ -105,7 +106,7 @@ if (isset($_POST['election_date']) && isset($_POST['data_url']) && isset($_POST[
       <div class="Large-8 large-centered medium-10 medium-centered columns">
         <h2>Convert Election Data</h2>
           <p>Paste the URL of a county or state results page and the results will be scraped into a data file. You must choose an election date and a county (choose "Colorado" for statewide results) to associate these data with.</p>
-          <p style="font-style:italic;font-weight:bold;color:darkred;">NOTE: Only URLs with <code>/Web02/</code> or <code>/Web02/#/</code> will work!</p>
+          <p style="font-style:italic;font-weight:bold;color:darkred;">NOTE: Only URLs with <code>/Web02/</code> (including versioned formats like <code>/Web02.012345/</code>), with or without <code>#/</code>at the end, will work!</p>
       </div>
     </div>
 
