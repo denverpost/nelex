@@ -2,3 +2,4 @@
 .DS_Store
 constants.php
 results/*
+control/urls.csv
