@@ -76,7 +76,7 @@
     <div id="results-container"></div>
     <script id="results-template" type="text/x-handlebars-template">
         {{#each this}}
-        <h3 class="race-title">{{race_name}}</h3> {{#results}}
+        <h3 class="race-title">{{race_name}}</h3> {{#eachByVotePct results "choice_vote_percent"}}
         <table class="fixed-width">
             <tbody>
                 <tr>
@@ -91,15 +91,24 @@
                 </tr>
             </tbody>
         </table>
-        {{/results}} {{/each}}
+        {{/eachByVotePct}} {{/each}}
         </div>
     </script>
     <script>
-    $.getJSON("results.json", function(data) {
+    $.getJSON("../results/20180626/arapahoe.json", function(data) {
         $(document).ready(function() {
             // Helper for formatting vote totals
             Handlebars.registerHelper('formatNumber', function(value) {
                 return value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "1,");
+            });
+            Handlebars.registerHelper('eachByVotePct', function(context,array_key,options){
+                var output = '';
+                var contextSorted = context.concat()
+                    .sort( function(a,b) { return b[array_key] - a[array_key] } );
+                for(var i=0, j=contextSorted.length; i<j; i++) {
+                    output += options.fn(contextSorted[i]);
+                }
+                return output;
             });
             var source = $("#results-template").html();
             var template = Handlebars.compile(source);
