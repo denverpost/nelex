@@ -2,21 +2,21 @@
 
 require_once './counties.php';
 
-function get_county_from_slug($cslug) {
-    foreach($counies as $county) {
+function get_county_from_slug($cslug,$counties) {
+    $return_county = false;
+    foreach($counties as $county) {
         $county_slug = str_replace(' ', '-', strtolower($county));
         if ($cslug == $county_slug) {
-            return $county;
-        } else {
-            return false;
+            $return_county = $county;
         }
     }
+    return $return_county;
 }
 
 $iframe = (isset($_GET['iframe']) && $_GET['iframe'] == 'true') ? true : false;
 $election_date = (isset($_GET['date']) && ctype_digit($_GET['date'])) ? $_GET['date'] : false;
 $election_county = (isset($_GET['county']) && ctype_alpha($_GET['county'])) ? $_GET['county'] : false;
-$election_county_display = (get_county_from_slug($election_county) && $election_county) ? get_county_from_slug($election_county) : false;
+$election_county_display = (get_county_from_slug($election_county,$counties) && $election_county) ? get_county_from_slug($election_county,$counties) : false;
 
 $base_url = 'https://elections.denverpost.com/';
 $base_title = 'Election Results - The Denver Post';
@@ -60,6 +60,8 @@ if ($election_date) {
         $datafile_address .= 'colorado.json';
     }
 }
+
+$elex_available = json_encode($elections_available);
 
 ?><!DOCTYPE HTML>
 <html lang="en">
@@ -118,6 +120,11 @@ if ($election_date) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
     <script>
         var datafile = <?php echo ($datafile_address) ? "'".$datafile_address."'" : 'false'; ?>;
+        var elex_available_php = <?php echo ($elex_available) ? "'".$elex_available."'" : 'false'; ?>;
+        var elex_available = [];
+        if ( elex_available_php !== 'false') {
+            elex_available = $.parseJSON(elex_available_php);
+        }
     </script>
 
     <script>
@@ -237,11 +244,11 @@ if ($election_date) {
 
         <div id="breadcrumbs">
             <a href="https://www.denverpost.com/politics/">Politics</a>
-            &rsaquo; <a href="https://elections.denverpost.com/">Elections</a>
+            <span style="font-size:120%;color:#aaa;padding:0 .25em;">&rsaquo;</span> <a href="https://elections.denverpost.com/">Elections</a>
             <?php if ($election_date) { ?>
-                &rsaquo; <a href="https://elections.denverpost.com/?date=<?php echo $election_date; ?>"><?php echo date('F j, Y',strtotime($election_date)); ?></a>
+                <span style="font-size:120%;color:#aaa;padding:0 .25em;">&rsaquo;</span> <a href="https://elections.denverpost.com/?date=<?php echo $election_date; ?>"><?php echo date('F j, Y',strtotime($election_date)); ?></a>
                 <?php if ($election_county) { ?>
-                &rsaquo; <a href="https://elections.denverpost.com/?date=<?php echo $election_date; ?>&county=<?php echo $election_county_display; ?>"><?php echo $election_county; ?></a>
+                <span style="font-size:120%;color:#aaa;padding:0 .25em;">&rsaquo;</span> <a href="https://elections.denverpost.com/?date=<?php echo $election_date; ?>&county=<?php echo $election_county; ?>"><?php echo $election_county_display; ?></a>
                 <?php }
                 } ?>
         </div>
@@ -318,28 +325,20 @@ if ($election_date) {
                 <div class="sidebar_headlines panel" style="margin-bottom:2em;">
                     <h4>Jump to results</h4>
                     <form mathod="get">
-                        <select name="county">
-                            <option value="" disabled<?php echo (!$election_county) ? ' selected' : ''; ?>>Select county...</option>
-                            <option value="colorado">Statewide results</option>
-                            <?php foreach ($counties as $county) {
-                                $countyslug = str_replace(' ', '-', strtolower($county));
-                                $county_selected = ($countyslug === $election_county) ? ' selected' : '';
-                                if ($county !== 'Colorado') { ?>
-                                <option value="<?php echo $countyslug; ?>"<?php echo $county_selected; ?>><?php echo $county; ?></option>
-                                <?php }
-                                } ?>
-                        </select>
-                        <select name="date">
-                            <option value="" disabled<?php echo (!$election_date) ? ' selected' : ''; ?>>Select date...</option>
+                        <select name="date" id="date_select">
+                            <option value="" disabled<?php echo (!$election_date) ? ' selected' : ''; ?>>Election date...</option>
                             <?php foreach($directories as $dir) {
                                 $datename = date('F j, Y',strtotime($dir));
                                 $date_selected = ($dir === $election_date) ? ' selected' : '';?>
                                 <option value="<?php echo $dir; ?>"<?php echo $date_selected; ?>><?php echo $datename; ?></option>
                             <?php } ?>
                         </select>
+                        <select name="county" id="county_select" disabled class="disabled-grey">
+                            <option value="">Select county...</option>
+                        </select>
                         <input type="button" onclick="form.submit();" value="Get results!" />
                     </form>
-                    </div>             
+                </div>
 
                 <div class="sidebar_headlines">
                     <h4>More politics headlines</h4>
@@ -417,6 +416,31 @@ if ($election_date) {
           clearInterval(checkExist);
        }
     }, 100);
+    function titleCaseCounty(str) {
+      str = str.toLowerCase().split('-');
+      for (var i = 0; i < str.length; i++) {
+        str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
+      }
+      return str.join(' ');
+    }
+    $('#date_select').on('change', function(){
+        var date_sel = $('#date_select').val().toString();
+        if (elex_available[date_sel].length > 0) {
+            $('#county_select').removeAttr('disabled');
+            $('#county_select').removeClass('disabled-grey');
+        }
+        if (elex_available[date_sel].indexOf('colorado') > -1 ) {
+            var html_statewide = '<option value="colorado">Statewide results</option>';
+            $('#county_select').append(html_statewide);
+        }
+        elex_available[date_sel].forEach(function(county_slug){
+            if (county_slug !== 'colorado') {
+                var county_name = titleCaseCounty(county_slug);
+                var html_output = '<option value="' + county_slug + '">' + county_name + '</option>';
+                $('#county_select').append(html_output);
+            }
+        });
+    });
     </script>
 </body>
 </html>
