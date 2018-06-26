@@ -276,7 +276,7 @@ if ($election_date) {
                     </div>
                 </script>
                 <script>
-                    //if (datafile != false) { 
+                    //if (datafile !== 'false') { 
                         $.getJSON("./html_framework/results.json", function(data) {
                             $(document).ready(function() {
                                 // Helper for formatting vote totals
