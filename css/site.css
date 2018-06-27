@@ -98,7 +98,9 @@ body.iframe div.maincol h1,
 body.iframe section#content-footer,
 body.iframe div#div-gpt-ad-bottom_leaderboard,
 body.iframe div#dfmFooter,
-body.iframe div.rightRail.sidebarcol {
+body.iframe div.rightRail.sidebarcol,
+body.iframe div#select_form,
+body.iframe div#select_form_alt {
     display: none!important;
 }
 
