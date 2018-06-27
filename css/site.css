@@ -76,13 +76,20 @@ body.iframe div#results-container td.table-data {
 }
 
 
+
 /* End Handlebar table styles */
 
-body.iframe {
-    margin: 0;
-    padding: 0;
-    width: 100%;
+body.iframe,
+body.iframe div.row,
+body.iframe #wrapper,
+body.iframe #wrapper div.maincol,
+body.iframe div.large-10.large-centered {
+    max-width:100%!important;
+    width:100%!important;
+    padding:0!important;
+    margin:0!important;
 }
+
 
 body.iframe div#dfmHeader,
 body.iframe div#div-gpt-ad-top_leaderboard,
