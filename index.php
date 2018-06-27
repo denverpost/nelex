@@ -316,7 +316,8 @@ $elex_available = json_encode($elections_available);
                             $(document).ready(function() {
                                 // Helper for formatting vote totals
                                 Handlebars.registerHelper('formatNumber', function(value) {
-                                    return value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "1,");
+                                    //return value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "1,");
+                                    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                                 });
                                 // Helper for sorting by vote percentage
                                 Handlebars.registerHelper('eachByVotePct', function(context,array_key,options){
