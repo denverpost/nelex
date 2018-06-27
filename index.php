@@ -151,11 +151,9 @@ $elex_available = json_encode($elections_available);
     
     <?php if ($iframe === false) { ?>
     <script>
-        if ( iframe === '' ) {
             var s = document.createElement("script");
             s.src = "//www.googletagservices.com/tag/js/gpt.js";
             $("head").append(s);
-        }
     </script>
     <?php } ?>
 
@@ -505,17 +503,15 @@ $elex_available = json_encode($elections_available);
     </div>
 
     <script>
-        if ( iframe === 1 ) {
-            (function(s, p, d) {
-              var h=d.location.protocol, i=p+"-"+s,
-                  e=d.getElementById(i), r=d.getElementById(p+"-root"),
-                  u=h==="https:"?"d1z2jf7jlzjs58.cloudfront.net"
-                  :"static."+p+".com";
-              if (e) return;
-              e = d.createElement(s); e.id = i; e.async = true;
-              e.src = h+"//"+u+"/p.js"; r.appendChild(e);
-            })("script", "parsely", document);
-        }
+        (function(s, p, d) {
+          var h=d.location.protocol, i=p+"-"+s,
+              e=d.getElementById(i), r=d.getElementById(p+"-root"),
+              u=h==="https:"?"d1z2jf7jlzjs58.cloudfront.net"
+              :"static."+p+".com";
+          if (e) return;
+          e = d.createElement(s); e.id = i; e.async = true;
+          e.src = h+"//"+u+"/p.js"; r.appendChild(e);
+        })("script", "parsely", document);
     </script>
     <!-- END Parse.ly Include: Standard -->
     <?php } ?>
