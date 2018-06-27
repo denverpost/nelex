@@ -143,12 +143,7 @@ $elex_available = json_encode($elections_available);
         if ( elex_available_php !== 'false') {
             elex_available = $.parseJSON(elex_available_php);
         }
-    </script>
-
-    <script>
-        var iframe = ( window.top !== window.self ) ? 1 : 0;
-    </script>
-    
+    </script>    
     <?php if ($iframe === false) { ?>
     <script>
             var s = document.createElement("script");
@@ -234,7 +229,6 @@ $elex_available = json_encode($elections_available);
   </script>
   <!-- End Google Tag Manager Data Layer -->
 <!-- Google Tag Manager --><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TLFP4R" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><script>
-        if ( iframe === '' ) {
 (function(w,d,s,l,i) {
    w[l]=w[l]||[];
    w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
@@ -243,7 +237,6 @@ $elex_available = json_encode($elections_available);
    j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })
 (window,document,'script','dataLayer','GTM-TLFP4R');
-}
 </script><!-- End Google Tag Manager -->
 <?php } ?>
 
@@ -410,15 +403,17 @@ $elex_available = json_encode($elections_available);
     <div id="dfmFooter" style="border-top:1px solid #ddd;"><!--CORPORATE FOOTER--></div>
     <script src="./js/nav.js"></script>
 
+    <?php if ($iframe) { ?>
     <script>
-    if ( iframe === 1 ) {
-        // Loop through all the links and add target="_parent"
-        $("a").each(function(index) {
-            $(this).attr('target', '_parent');
-        });
-        // Remove the logo and footer
-        $('footer, #dfmHeader, #dfmFooter, #breadcrumbs').remove();
-    }
+    // Loop through all the links and add target="_parent"
+    $("a").each(function(index) {
+        $(this).attr('target', '_parent');
+    });
+    // Remove the logo and footer
+    $('footer, #dfmHeader, #dfmFooter, #breadcrumbs').remove();
+    </script>
+    <?php } ?>
+    <script>
     var checkExist = setInterval(function() {
        if ($('#web-push-prompt').length) {
           $('#web-push-prompt').remove();
