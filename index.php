@@ -285,6 +285,9 @@ $elex_available = json_encode($elections_available);
                         <?php } else if ($datafile_address == './results/20180626/default.json') { ?>
                             <h6 style="margin-top:1em;"><a href="https://elections.denverpost.com/?date=20180626&county=colorado">See full results for other races&nbsp;&raquo;</a></h6>
                         <?php } ?>
+                        <?php if ($iframe === false) { ?>
+                        <h6 style="margin-top:2em;"><a href="http://data.denverpost.com/">See results from elections from prior 2018&nbsp;&raquo;</a></h6>
+                        <?php } ?>
                     </div>
                 </div>
 
