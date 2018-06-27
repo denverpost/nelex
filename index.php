@@ -32,9 +32,9 @@ $election_county_display = (get_county_from_slug($election_county,$counties) && 
 $base_url = 'https://elections.denverpost.com/';
 $base_title = 'Election Results - The Denver Post';
 $base_description = 'Election results for national, state, county and city elections in Colorado from The Denver Post.';
-$election_county_for_title = ($election_county_display === 'All Counties') ? titleCase($election_county_display) : titleCase($election_county_display) . ' County';
-$base_title = ($election_county_for_title) ? $election_county_for_title . ' ' . $base_title : $base_title;
-$display_title = ($election_county_display) ? str_replace(' - The Denver Post', '', $base_title) : $base_title;
+$election_county_for_title = ($election_county && $election_county_display === 'All Counties') ? titleCase($election_county_display) : titleCase($election_county_display) . ' County';
+$base_title = ($election_county && $election_county_for_title) ? $election_county_for_title . ' ' . $base_title : $base_title;
+$display_title = ($election_county && $election_county_display) ? str_replace(' - The Denver Post', '', $base_title) : $base_title;
 
 $directories = array();
 if ($results = scandir('./results')) {
