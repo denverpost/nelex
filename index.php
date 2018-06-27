@@ -424,6 +424,12 @@ $elex_available = json_encode($elections_available);
           clearInterval(checkExist);
        }
     }, 100);
+    var checkExistTwo = setInterval(function() {
+       if ($('.widget-trending-stories').length) {
+          $('.widget-trending-stories').remove();
+          clearInterval(checkExistTwo);
+       }
+    }, 100);
     $(document).ready(function(){
         if(window.innerWidth <= 768) {
             $('#select_form_alt').html($('#select_form').html());
