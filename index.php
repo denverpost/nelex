@@ -412,31 +412,6 @@ $elex_available = json_encode($elections_available);
     <div id="dfmFooter" style="border-top:1px solid #ddd;"><!--CORPORATE FOOTER--></div>
     <script src="./js/nav.js"></script>
 
-    <footer>
-    <!-- START Parse.ly Include: Standard -->
-    <div id="parsely-root" style="display: none">
-      <span id="parsely-cfg" data-parsely-site="denverpost.com"></span>
-    </div>
-
-    <?php if ($iframe === false) { ?>
-    <script>
-        if ( iframe === 1 ) {
-            (function(s, p, d) {
-              var h=d.location.protocol, i=p+"-"+s,
-                  e=d.getElementById(i), r=d.getElementById(p+"-root"),
-                  u=h==="https:"?"d1z2jf7jlzjs58.cloudfront.net"
-                  :"static."+p+".com";
-              if (e) return;
-              e = d.createElement(s); e.id = i; e.async = true;
-              e.src = h+"//"+u+"/p.js"; r.appendChild(e);
-            })("script", "parsely", document);
-        }
-    </script>
-    <!-- END Parse.ly Include: Standard -->
-    <?php } ?>
-
-    </footer>
-    
     <script>
     if ( iframe === 1 ) {
         // Loop through all the links and add target="_parent"
@@ -453,7 +428,6 @@ $elex_available = json_encode($elections_available);
        }
     }, 100);
     $(document).ready(function(){
-        console.log(window.innerWidth);
         if(window.innerWidth <= 768) {
             $('#select_form_alt').html($('#select_form').html());
         } else {
@@ -503,5 +477,47 @@ $elex_available = json_encode($elections_available);
         }
     });
     </script>
+    <?php if ($iframe === false) { ?>
+        <script>
+        PARSELY = {
+            // after PARSELY tracking code loads asynchronously
+            onload: function() {
+                // bind pageview tracking for all "next" links.
+                // example event listener; set your own based 
+                // on your site design
+                jQuery("a.next").bind("click", function() {
+                    var url = this.href,
+                        urlref = location.href;
+
+                    PARSELY.beacon.trackPageView({
+                        url: url,
+                        urlref: urlref,
+                        js: 1
+                    });
+                    return true;
+                });
+            }
+        };
+    </script>
+    <!-- START Parse.ly Include: Standard -->
+    <div id="parsely-root" style="display: none">
+      <span id="parsely-cfg" data-parsely-site="denverpost.com"></span>
+    </div>
+
+    <script>
+        if ( iframe === 1 ) {
+            (function(s, p, d) {
+              var h=d.location.protocol, i=p+"-"+s,
+                  e=d.getElementById(i), r=d.getElementById(p+"-root"),
+                  u=h==="https:"?"d1z2jf7jlzjs58.cloudfront.net"
+                  :"static."+p+".com";
+              if (e) return;
+              e = d.createElement(s); e.id = i; e.async = true;
+              e.src = h+"//"+u+"/p.js"; r.appendChild(e);
+            })("script", "parsely", document);
+        }
+    </script>
+    <!-- END Parse.ly Include: Standard -->
+    <?php } ?>
 </body>
 </html>
