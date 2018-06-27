@@ -6,7 +6,7 @@
 }
 
 .race-title {
-    font-size: 1.6rem !important;
+    font-size: 1.2rem !important;
     line-height: 1.1 !important;
     font-weight: 700 !important;
     margin-bottom: 13px !important;
@@ -61,6 +61,16 @@
     height: 20px;
     /*background-color: #214a74;*/
     background-color: #006d2c;
+}
+
+body.iframe h3.race-title {
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+    margin-top: 13px;
+}
+
+body.iframe td.table-data {
+    padding: 2px;
 }
 
 
