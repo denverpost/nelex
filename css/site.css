@@ -62,8 +62,10 @@ div#results-container .bar-percentage {
     /*background-color: #214a74;*/
     background-color: #006d2c;
 }
-
-body.iframe div#results-container  h3.race-title {
+body.iframe div#results-container div.race-wrap {
+    margin-bottom:.5em;
+}
+body.iframe div#results-container h3.race-title {
     font-size: 1.2rem;
     margin-bottom: 4px;
     margin-top: 0px;

@@ -270,28 +270,31 @@ $elex_available = json_encode($elections_available);
                         <div id="results-container">
                         </div>
                         <?php if ($iframe) { ?>
-                            <h6 style="margin-top:1em;"><a href="https://elections.denverpost.com/">See full election results for other races&nbsp;&raquo;</a></h6>
+                            <h6><a href="https://elections.denverpost.com/">See full election results for other races&nbsp;&raquo;</a></h6>
                         <?php } ?>
                     </div>
                 </div>
 
                 <script id="results-template" type="text/x-handlebars-template">
                     {{#each this}}
-                    <h3 class="race-title">{{race_name}}</h3> {{#eachByVotePct results "choice_vote_percent"}}
-                    <table id="results-table" class="fixed-width">
-                        <tbody>
-                            <tr>
-                                <td class="table-data">{{choice_name}}</td><td class="table-data">{{choice_vote_percent}}%</td>
-                                <td class="table-data">
-                                    <div class="bar-background">
-                                        <div class="bar-percentage" style="width:{{choice_vote_percent}}%"></div>
-                                    </div>
-                                </td>
-                                <td class="table-data">{{formatNumber choice_votes}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    {{/eachByVotePct}} {{/each}}
+                    <div class="race-wrap">
+                        <h3 class="race-title">{{race_name}}</h3> {{#eachByVotePct results "choice_vote_percent"}}
+                        <table id="results-table" class="fixed-width">
+                            <tbody>
+                                <tr>
+                                    <td class="table-data">{{choice_name}}</td><td class="table-data">{{choice_vote_percent}}%</td>
+                                    <td class="table-data">
+                                        <div class="bar-background">
+                                            <div class="bar-percentage" style="width:{{choice_vote_percent}}%"></div>
+                                        </div>
+                                    </td>
+                                    <td class="table-data">{{formatNumber choice_votes}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    {{/eachByVotePct}}
+                    </div>
+                    {{/each}}
                     </div>
                 </script>
                 <script>
