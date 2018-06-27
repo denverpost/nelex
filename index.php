@@ -2,6 +2,17 @@
 
 require_once './counties.php';
 
+function titleCase($string) {
+        $smallwordsarray = array('of','a','the','and','an','or','nor','but','is','if','then','else','when','at','from','by','on','off','for','in','out','over','to','into','with');
+        $words = explode(' ', $string);
+        foreach ($words as $key => $word) {
+            if (!$key or !in_array($word, $smallwordsarray))
+            $words[$key] = ucwords($word);
+        }
+        $newtitle = implode(' ', $words);
+        return $newtitle;
+    }
+
 function get_county_from_slug($cslug,$counties) {
     $return_county = false;
     foreach($counties as $county) {
@@ -10,7 +21,7 @@ function get_county_from_slug($cslug,$counties) {
             $return_county = $county;
         }
     }
-    return $return_county;
+    return ($return_county === 'Colorado') ? 'All Counties' : $return_county;
 }
 
 $iframe = (isset($_GET['iframe']) && $_GET['iframe'] == 'true') ? true : false;
@@ -20,7 +31,10 @@ $election_county_display = (get_county_from_slug($election_county,$counties) && 
 
 $base_url = 'https://elections.denverpost.com/';
 $base_title = 'Election Results - The Denver Post';
-$base_description = 'Election results for national, state, county and city elections in Colorado from The Denve Post.';
+$base_description = 'Election results for national, state, county and city elections in Colorado from The Denver Post.';
+$election_county_for_title = ($election_county_display === 'All Counties') ? titleCase($election_county_display) : titleCase($election_county_display) . ' County';
+$base_title = ($election_county_for_title) ? $election_county_for_title . ' ' . $base_title : $base_title;
+$display_title = ($election_county_display) ? str_replace(' - The Denver Post', '', $base_title) : $base_title;
 
 $directories = array();
 if ($results = scandir('./results')) {
@@ -80,7 +94,7 @@ $elex_available = json_encode($elections_available);
 
     <meta name="distribution" content="global" />
     <meta name="robots" content="index" />
-    <meta name="title" content="Election Results - The Denver Post" />
+    <meta name="title" content="<?php echo $base_title; ?>" />
     <meta name="language" content="en, sv" />
     <meta name="Copyright" content="Copyright &copy; The Denver Post." />
 
@@ -89,7 +103,7 @@ $elex_available = json_encode($elections_available);
 
     <meta name="twitter:card" value="summary" />
     <meta name="twitter:url" value="https://elections.denverpost.com" />
-    <meta name="twitter:title" value="Election Results - The Denver Post" />
+    <meta name="twitter:title" value="<?php echo $base_title; ?>" />
     <meta name="twitter:description" value="<?php echo $base_description; ?>" />
     <meta name="twitter:image" value="<?php echo $base_url; ?>img/election-results-share.jpg" />
     <meta name="twitter:site" value="@denverpost" />
@@ -263,7 +277,7 @@ $elex_available = json_encode($elections_available);
 
                 <div id="select_form_alt"></div>
 
-                <h1><?php echo $base_title; ?></h1>
+                <h1><?php echo $display_title; ?></h1>
                 <!-- RESULTS TABLE STARTS HERE -->
                 <div class="row">                    
                     <div class="large-10 large-centered columns">
