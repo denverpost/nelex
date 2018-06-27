@@ -266,7 +266,13 @@ $elex_available = json_encode($elections_available);
                 <h1><?php echo $base_title; ?></h1>
                 <!-- RESULTS TABLE STARTS HERE -->
                 <div class="row">                    
-                    <div id="results-container" class="large-10 large-centered columns"></div>
+                    <div class="large-10 large-centered columns">
+                        <div id="results-container">
+                        </div>
+                        <?php if ($iframe) { ?>
+                            <h6 style="margin-top:1em;"><a href="https://elections.denverpost.com/">See full election results for other races&nbsp;&raquo;</a></h6>
+                        <?php } ?>
+                    </div>
                 </div>
 
                 <script id="results-template" type="text/x-handlebars-template">
