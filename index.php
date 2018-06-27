@@ -259,7 +259,9 @@ $elex_available = json_encode($elections_available);
 
         <div class="row body-copy">
 
-            <div class="maincol small-12 large-9 columns">
+            <div class="maincol small-12 large-9 medium-8 columns">
+
+                <div id="select_form_alt"></div>
 
                 <h1><?php echo $base_title; ?></h1>
                 <!-- RESULTS TABLE STARTS HERE -->
@@ -316,7 +318,7 @@ $elex_available = json_encode($elections_available);
             </div>
             <!-- RESULTS TABLE ENDS HERE -->
 
-            <div class="rightRail sidebarcol small-12 large-3 columns" id="rightRail">
+            <div class="rightRail sidebarcol small-12 large-3 medium-4 columns" id="rightRail">
 
 
 
@@ -326,22 +328,24 @@ $elex_available = json_encode($elections_available);
                     </script>
                 </div>
 
-                <div class="sidebar_headlines panel" style="margin-bottom:2em;">
-                    <h4>Jump to results</h4>
-                    <form mathod="get">
-                        <select name="date" id="date_select">
-                            <option value="" disabled<?php echo (!$election_date) ? ' selected' : ''; ?>>Election date...</option>
-                            <?php foreach($directories as $dir) {
-                                $datename = date('F j, Y',strtotime($dir));
-                                $date_selected = ($dir === $election_date) ? ' selected' : '';?>
-                                <option value="<?php echo $dir; ?>"<?php echo $date_selected; ?>><?php echo $datename; ?></option>
-                            <?php } ?>
-                        </select>
-                        <select name="county" id="county_select" disabled class="disabled-grey">
-                            <option value="">Select county...</option>
-                        </select>
-                        <input type="button" onclick="form.submit();" value="Get results!" />
-                    </form>
+                <div id="select_form">
+                    <div class="sidebar_headlines panel" style="margin-bottom:2em;">
+                        <h4>Jump to results</h4>
+                        <form mathod="get">
+                            <select name="date" id="date_select">
+                                <option value="" disabled<?php echo (!$election_date) ? ' selected' : ''; ?>>Election date...</option>
+                                <?php foreach($directories as $dir) {
+                                    $datename = date('F j, Y',strtotime($dir));
+                                    $date_selected = ($dir === $election_date) ? ' selected' : '';?>
+                                    <option value="<?php echo $dir; ?>"<?php echo $date_selected; ?>><?php echo $datename; ?></option>
+                                <?php } ?>
+                            </select>
+                            <select name="county" id="county_select" disabled class="disabled-grey">
+                                <option value="">Select county...</option>
+                            </select>
+                            <input type="button" onclick="form.submit();" value="Get results!" />
+                        </form>
+                    </div>
                 </div>
 
                 <div class="sidebar_headlines">
@@ -420,6 +424,21 @@ $elex_available = json_encode($elections_available);
           clearInterval(checkExist);
        }
     }, 100);
+    $(document).ready(function(){
+        console.log(window.innerWidth);
+        if(window.innerWidth <= 768) {
+            $('#select_form_alt').html($('#select_form').html());
+        } else {
+            $('#select_form_alt').html('');
+        }
+    });
+    $(window).resize(function(){
+        if(window.innerWidth <= 768) {
+            $('#select_form_alt').html($('#select_form').html());
+        } else {
+            $('#select_form_alt').html('');
+        }
+    });
     </script>
     <script>
     function titleCaseCounty(str) {
@@ -451,7 +470,6 @@ $elex_available = json_encode($elections_available);
         getAvailableCounties();
     });
     $(document).ready(function(){
-        console.log($('#date_select').val());
         if($('#date_select').val() != '') {
             getAvailableCounties(); 
         }
