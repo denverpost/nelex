@@ -143,7 +143,7 @@ h6 {
 }
 
 #wrapper div.maincol h1 {
-    font-size:1.25em;
+    font-size:1.35em;
     margin-top:.5em;
 }
 #iframe_breadcrumb {
@@ -282,18 +282,6 @@ body #wrapper * a {
     .adElement {
         width: 100%!important;
     }
-    body h1,
-    body h2,
-    body h3,
-    body h4,
-    body h5,
-    body h6 {
-        line-height: 1;
-    }
-    body h1 {
-        width: 100%!important;
-        font-size: 2em!important;
-    }
 
     /* Fix Bill Tracker nav */
     .stamp span:before,
@@ -309,10 +297,6 @@ body #wrapper * a {
     }
     body dl dt {
         margin-bottom: 0.75rem;
-    }
-    .maincol,
-    .sidebarcol {
-        clear: both;
     }
 
     /* Fix line-height on breadcrumbs */
@@ -476,4 +460,19 @@ h6:hover .anchor .intralink {
 #wrapper ul,
 #wrapper ol {
     margin-left: 1em;
+}
+
+
+@media only screen and (max-width: 640px) {
+    ul#footer-menu {
+        display:none;
+    }
+    ul#footer-bottom-menu>li {
+        float:none;
+    }
+    div.rightRail.sidebarcol {
+        margin-top:1.5em;
+        padding-top: .75em;
+        border-top:2px solid #aaa;
+    }
 }

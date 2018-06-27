@@ -281,9 +281,9 @@ $elex_available = json_encode($elections_available);
                         <div id="results-container">
                         </div>
                         <?php if ($iframe) { ?>
-                            <h6><a href="https://elections.denverpost.com/">See full election results for other races&nbsp;&raquo;</a></h6>
+                            <h6><a href="https://elections.denverpost.com/?date=20180626&county=colorado">See full results for other races&nbsp;&raquo;</a></h6>
                         <?php } else if ($datafile_address == './results/20180626/default.json') { ?>
-                            <h6 style="margin-top:1em;"><a href="https://elections.denverpost.com/?date=20180626&county=colorado">See full election results for other races&nbsp;&raquo;</a></h6>
+                            <h6 style="margin-top:1em;"><a href="https://elections.denverpost.com/?date=20180626&county=colorado">See full results for other races&nbsp;&raquo;</a></h6>
                         <?php } ?>
                     </div>
                 </div>
@@ -430,19 +430,20 @@ $elex_available = json_encode($elections_available);
           clearInterval(checkExistTwo);
        }
     }, 100);
-    $(document).ready(function(){
+    function swapForms(){
         if(window.innerWidth <= 768) {
             $('#select_form_alt').html($('#select_form').html());
+            $('#select_form').css('display','none');
         } else {
             $('#select_form_alt').html('');
+            $('#select_form').css('display','block');
         }
+    }
+    $(document).ready(function(){
+        swapForms();
     });
     $(window).resize(function(){
-        if(window.innerWidth <= 768) {
-            $('#select_form_alt').html($('#select_form').html());
-        } else {
-            $('#select_form_alt').html('');
-        }
+       swapForms();
     });
     </script>
     <script>
