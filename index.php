@@ -15,7 +15,7 @@ function get_county_from_slug($cslug,$counties) {
 
 $iframe = (isset($_GET['iframe']) && $_GET['iframe'] == 'true') ? true : false;
 $election_date = (isset($_GET['date']) && ctype_digit($_GET['date'])) ? $_GET['date'] : '20180626';
-$election_county = (isset($_GET['county']) && ctype_alpha($_GET['county'])) ? $_GET['county'] : false;
+$election_county = (isset($_GET['county']) && preg_match('/^[A-Za-z-]+$/', $_GET['county'])) ? $_GET['county'] : false;
 $election_county_display = (get_county_from_slug($election_county,$counties) && $election_county) ? get_county_from_slug($election_county,$counties) : false;
 
 $base_url = 'https://elections.denverpost.com/';
@@ -447,7 +447,6 @@ $elex_available = json_encode($elections_available);
             }
         });
     }
-
     $('#date_select').on('change', function(){
         getAvailableCounties();
     });
