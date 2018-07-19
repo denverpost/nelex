@@ -4,28 +4,39 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+// Just used for testing to output arrays more attractively
 function pretty_dump($var) {
   echo '<pre>' . var_export($var, true) . '</pre>';
 }
 
+// full of helper functions
 require_once './functions.php';
 require_once '../counties.php';
 
+// where data files go
 $data_path = '../results/';
 
+// instantiations
 $json = $results_string = false;
+
+// If we've submitted the form
 if (isset($_POST['election_date']) && isset($_POST['data_url']) && isset($_POST['election_county'])) {
+  // get the POSt data
   $county = (isset($_POST['election_date'])) ? $_POST['election_county'] : false;
   $date = (isset($_POST['election_date'])) ? date('Ymd', strtotime($_POST['election_date'])) : false;
   $url = (isset($_POST['data_url']) && filter_var($_POST['data_url'], FILTER_VALIDATE_URL) ) ? $_POST['data_url'] : false;
+
+  // These try to drop pieces of various types of Clarity results page URLs' to arrive at the root for that county, that date
   $url = remove_if_trailing($_POST['data_url'],'#/');
   $url = preg_replace('/Web02\.[0-9]{6}/', 'Web02', $url);
   $url = preg_replace('/Web02-state\.[0-9]{6}/', 'Web02-state', $url);
   $base_url = remove_if_trailing($url,'Web02/');
   $base_url = remove_if_trailing($base_url,'Web02-state/');
 
+  // The file where we store the list of things to check up on **HC** Empty it out before each election
   $handle = fopen('urls.csv', 'r');
   $url_exists = false;
+  // Make sure the URLs file doesn't already have this in it
   if ($handle) {
       while (($line = fgets($handle)) !== false) {
           if ($date.','.$county.','.$base_url == trim($line)) {
@@ -35,17 +46,22 @@ if (isset($_POST['election_date']) && isset($_POST['data_url']) && isset($_POST[
       }
       fclose($handle);
       if (!$url_exists) {
+        // if it's not there, add it quick
         file_put_contents('urls.csv', $date.','.$county.','.$base_url."\n", FILE_APPEND);
       }
   }
 
+  // Get the mysterious version number, which Clarity stores in a text file in each couty-electiondate directory
   $version_url = $base_url.'current_ver.txt';
   $current_version = file_get_contents($version_url);
+  // use the version to get the most-current results file
   $json_url = $base_url.$current_version.'/json/en/summary.json';
   $json = file_get_contents($json_url);
+  // convert the json to an array
   $results_input = json_decode($json, true);
   $results_output = array();
   $ct=0;
+  // Go through the array and start lifting out just the bits we want to keep for display
   foreach ($results_input as $result) {
     $results_output[$ct]['race_name'] = titleCase($result['C']);
     foreach ($result['CH'] as $key => $value) {
@@ -59,15 +75,19 @@ if (isset($_POST['election_date']) && isset($_POST['data_url']) && isset($_POST[
     }
     $ct++;
   }
+  // Encode the array back to JSON
   $results_string = json_encode($results_output);
+  // Get into the results dir and create children based on the election date (if they aren't there)
   $elex_dir = $data_path.$date.'/';
   if (!file_exists($elex_dir)) {
     mkdir($elex_dir, 0755, true);
   }
+  // then write each county file into them (county 'colorado' is state-wide/multi-geography results; 'default' is the races selected for display on the hompage)
   $filename = $elex_dir.$county.'.json';
   if (file_exists($filename)) {
     rename($filename,$filename.'.old');
   }
+  // save it
   file_put_contents($filename,$results_string);
   chmod($filename, 0755);
 }
@@ -160,6 +180,7 @@ if (isset($_POST['election_date']) && isset($_POST['data_url']) && isset($_POST[
                 </div>
                 <div class="large-6 large-pull-3 columns">
                   <select name="election_date" id="election_date" required>
+                    <option value="20181106">2018-11-06</option><!-- ADD NEW ELEX DATA **HC** -->
                     <option value="20180626">2018-06-26</option>
                   </select>
                 </div>

@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Doesn't do much of anything yet, just designed to be the place one would add/edit
+ * a new ELECTION object in the SQLite DB.
+ */
+
 require_once './functions.php';
 
 if (isset($_POST['election_date'])) {

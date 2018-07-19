@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Literally just an array of the available counties in Colorado
+ */
+
 $counties = array(
 	'Adams',
 	'Alamosa',

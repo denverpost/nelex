@@ -1,5 +1,25 @@
 <?php
 
+/**
+ * 
+ * VIRTUALLY NOTHING IN HERE IS ACTUALLY USED AT THIS POINT
+ *
+ * THE IDEA WAS to have a place to handle all the operations that would be
+ * required using an SQLite DB to store various ELECTION objects with dates
+ * and the associated county results URLs for each. These functions do most
+ * of the same types of operations that would be required for nelex, just
+ * need to be adjust from their former life as part of the holiday-lights app.
+ *
+ * PLANS FOR THE FUTURE: Finish off the DB interactions and set up a script
+ * that can be running in cron all the time, checking for results in all
+ * associated counties when there's an election object set as "live," and
+ * doing nothing if not. That would make back-end control as simple as setting
+ * up the election as zeroed results pages appear on Clarity. The basic form page
+ * template is in election_edit.php. index.php only redirects to convert.php for now.
+ * 
+ */
+
+
 date_default_timezone_set('America/Denver');
 
 if (!function_exists('get_config')) {
