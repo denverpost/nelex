@@ -36,7 +36,8 @@ $election_county_for_title = ($election_county && $election_county_display === '
 $base_title = ($election_county && $election_county_for_title) ? $election_county_for_title . ' ' . $base_title : $base_title;
 $display_title = ($election_county && $election_county_display) ? str_replace(' - The Denver Post', '', $base_title) : $base_title;
 
-// WHAT DOES THIS DO***
+
+// BUILD A LIST OF ELECTIONS and ELECTION DATA SOURCES
 $directories = array();
 if ($results = scandir('./results')) {
     foreach ($results as $result) {
@@ -147,9 +148,9 @@ $elex_available = json_encode($elections_available);
     </script>    
     <?php if ($iframe === false) { ?>
     <script>
-            var s = document.createElement("script");
-            s.src = "//www.googletagservices.com/tag/js/gpt.js";
-            $("head").append(s);
+		var s = document.createElement("script");
+		s.src = "//www.googletagservices.com/tag/js/gpt.js";
+		$("head").append(s);
     </script>
     <?php } ?>
 
