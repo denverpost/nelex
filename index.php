@@ -264,7 +264,7 @@ $elex_available = json_encode($elections_available);
 
         <div class="row body-copy">
 
-            <div class="maincol small-12 large-9 medium-8 columns">
+            <main class="maincol small-12 large-9 medium-8 columns">
 
                 <div id="select_form_alt"></div>
 
@@ -341,10 +341,10 @@ $elex_available = json_encode($elections_available);
                     };
                 </script>
 
-            </div>
+            </main>
             <!-- RESULTS TABLE ENDS HERE -->
 
-            <div class="rightRail sidebarcol small-12 large-3 medium-4 columns" id="rightRail">
+            <aside class="rightRail sidebarcol small-12 large-3 medium-4 columns" id="rightRail">
 
 
 
@@ -354,7 +354,7 @@ $elex_available = json_encode($elections_available);
                     </script>
                 </div>
 
-                <div id="select_form">
+                <nav id="select_form">
                     <div class="sidebar_headlines panel" style="margin-bottom:2em;">
                         <h4>Jump to results</h4>
                         <form mathod="get">
@@ -372,7 +372,7 @@ $elex_available = json_encode($elections_available);
                             <input type="button" onclick="form.submit();" value="Get results!" />
                         </form>
                     </div>
-                </div>
+                </nav>
 
                 <div class="sidebar_headlines">
                     <h4>More politics headlines</h4>
@@ -390,7 +390,7 @@ $elex_available = json_encode($elections_available);
                     </script>
                 </div>
 
-            </div><!-- END rightRail -->
+            </aside><!-- END rightRail -->
             <div class="clear" style="height:0;width:100%;clear:both;"></div>
         </div><!-- END div.row -->
 

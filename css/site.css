@@ -82,7 +82,7 @@ body.iframe div#results-container td.table-data {
 body.iframe,
 body.iframe div.row,
 body.iframe #wrapper,
-body.iframe #wrapper div.maincol,
+body.iframe #wrapper .maincol,
 body.iframe div.large-10.large-centered {
     max-width:100%!important;
     width:100%!important;
@@ -91,22 +91,22 @@ body.iframe div.large-10.large-centered {
 }
 
 
-body.iframe div#dfmHeader,
+body.iframe #dfmHeader,
 body.iframe div#div-gpt-ad-top_leaderboard,
 body.iframe div#breadcrumbs,
 body.iframe div.maincol h1,
 body.iframe section#content-footer,
 body.iframe div#div-gpt-ad-bottom_leaderboard,
-body.iframe div#dfmFooter,
-body.iframe div.rightRail.sidebarcol,
-body.iframe div#select_form,
-body.iframe div#select_form_alt {
+body.iframe #dfmFooter,
+body.iframe .rightRail.sidebarcol,
+body.iframe #select_form,
+body.iframe #select_form_alt {
     display: none!important;
 }
 
 body.iframe div#wrapper,
 body.iframe div#wrapper div.body-copy,
-body.iframe div#wrapper div.maincol {
+body.iframe div#wrapper .maincol {
     margin: 0!important;
     padding: 0!important;
 }
@@ -142,7 +142,7 @@ h6 {
     line-height: 1.1;
 }
 
-#wrapper div.maincol h1 {
+#wrapper .maincol h1 {
     font-size:1.35em;
     margin-top:.5em;
 }
@@ -470,7 +470,7 @@ h6:hover .anchor .intralink {
     ul#footer-bottom-menu>li {
         float:none;
     }
-    div.rightRail.sidebarcol {
+    .rightRail.sidebarcol {
         margin-top:1.5em;
         padding-top: .75em;
         border-top:2px solid #aaa;

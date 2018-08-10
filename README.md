@@ -1,4 +1,7 @@
 # nelex
+The Denver Post's Next Election Results site.
+
+## Usage
 
 ### Requirements
 
