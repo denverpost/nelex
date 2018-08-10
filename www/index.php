@@ -57,6 +57,8 @@ require_once './views.php';
     <script src="./js/modernizr.min.js"></script>
     <script src="./js/handlebars.min.js"></script>
     <script>
+		// ELECTIONS VAR PREP
+		const d = document;
         var datafile = <?php echo ($datafile_address) ? "'".$datafile_address."'" : 'false'; ?>;
         var elex_available_php = <?php echo ($elex_available) ? "'".$elex_available."'" : 'false'; ?>;
         var elex_available = [];
@@ -252,10 +254,10 @@ require_once './views.php';
                                     }
                                     return output;
                                 });
-                                var source = $("#results-template").html();
+                                var source = d.getElementById('results-template').innerHTML;
                                 var template = Handlebars.compile(source);
                                 var html = template(data);
-                                $('#results-container').html(html);
+                                d.getElementById('results-container').innerHTML = html;
                             })
                         })
                     };
@@ -264,9 +266,8 @@ require_once './views.php';
             </main>
             <!-- RESULTS TABLE ENDS HERE -->
 
+
             <aside class="rightRail sidebarcol small-12 large-3 medium-4 columns" id="rightRail">
-
-
 
                 <div id='dfp-20' class='ad'>
                     <script>
@@ -277,7 +278,7 @@ require_once './views.php';
                 <nav id="select_form">
                     <div class="sidebar_headlines panel" style="margin-bottom:2em;">
                         <h4>Jump to results</h4>
-                        <form mathod="get">
+                        <form method="get">
                             <select name="date" id="date_select">
                                 <option value="" disabled<?php echo (!$election_date) ? ' selected' : ''; ?>>Election date...</option>
                                 <?php foreach($directories as $dir) {
