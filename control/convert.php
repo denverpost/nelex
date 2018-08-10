@@ -11,7 +11,7 @@ function pretty_dump($var) {
 
 // full of helper functions
 require_once './functions.php';
-require_once '../counties.php';
+require_once '../constants.php';
 
 // where data files go
 $data_path = '../results/';

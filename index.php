@@ -1,6 +1,6 @@
 <?php
 
-require_once './counties.php';
+require_once './constants.php';
 
 function titleCase($string) {
         $smallwordsarray = array('of','a','the','and','an','or','nor','but','is','if','then','else','when','at','from','by','on','off','for','in','out','over','to','into','with');
