@@ -1,8 +1,6 @@
 <?php
-
 require_once './constants.php';
 require_once './views.php';
-
 ?><!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -20,8 +18,8 @@ require_once './views.php';
     <meta name="language" content="en, sv" />
     <meta name="Copyright" content="Copyright &copy; The Denver Post." />
 
-    <meta name="description" content="Election results for national, state, county and city elections in Colorado from The Denver Post.">
-    <meta name="news_keywords" content="election,results,votes,candidates,politics,colorado,legislature,governor,secretary">
+    <meta name="description" content="<?php echo $base_description; ?>">
+    <meta name="keywords" content="Colorado election results,Denver election results">
 
     <meta name="twitter:card" value="summary" />
     <meta name="twitter:url" value="https://elections.denverpost.com" />
@@ -162,7 +160,7 @@ require_once './views.php';
 </script><!-- End Google Tag Manager -->
 <?php } ?>
 
-<div id="dfmHeader"><!--Header Goes Here--></div>
+	<div id="dfmHeader"><!--Header Goes Here--></div>
     <div id="div-gpt-ad-top_leaderboard" class="dfp-ad dfp-top_leaderboard" data-ad-unit="top_leaderboard">
         <script>
             if ( "undefined" !== typeof googletag ) {
@@ -208,7 +206,7 @@ require_once './views.php';
                             <h6 style="margin-top:1em;"><a href="https://elections.denverpost.com/?date=20180626&county=colorado">See full results for other races&nbsp;&raquo;</a></h6>
                         <?php } ?>
                         <?php if ($iframe === false) { ?>
-                        <h6 style="margin-top:2em;"><a href="http://data.denverpost.com/">See results from elections from prior 2018&nbsp;&raquo;</a></h6>
+                        <h6 style="margin-top:2em;"><a href="http://data.denverpost.com/">See pre-2018 Colorado election results&nbsp;&raquo;</a></h6>
                         <?php } ?>
                     </div>
                 </div>
