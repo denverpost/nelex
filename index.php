@@ -31,11 +31,12 @@ $election_county_display = (get_county_from_slug($election_county,$counties) && 
 
 $base_url = 'https://elections.denverpost.com/';
 $base_title = 'Election Results - The Denver Post';
-$base_description = 'Election results for national, state, county and city elections in Colorado from The Denver Post.';
+$base_description = 'Colorado election results for national, state, county and city elections from The Denver Post.';
 $election_county_for_title = ($election_county && $election_county_display === 'All Counties') ? titleCase($election_county_display) : titleCase($election_county_display) . ' County';
 $base_title = ($election_county && $election_county_for_title) ? $election_county_for_title . ' ' . $base_title : $base_title;
 $display_title = ($election_county && $election_county_display) ? str_replace(' - The Denver Post', '', $base_title) : $base_title;
 
+// WHAT DOES THIS DO***
 $directories = array();
 if ($results = scandir('./results')) {
     foreach ($results as $result) {
@@ -135,7 +136,7 @@ $elex_available = json_encode($elections_available);
 
     <script src="./js/jquery.min.js"></script>
     <script src="./js/modernizr.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+    <script src="./js/handlebars.min.js"></script>
     <script>
         var datafile = <?php echo ($datafile_address) ? "'".$datafile_address."'" : 'false'; ?>;
         var elex_available_php = <?php echo ($elex_available) ? "'".$elex_available."'" : 'false'; ?>;
