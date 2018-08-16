@@ -1,8 +1,11 @@
 <?php
 
-/**
- * Literally just an array of the available counties in Colorado
- */
+define('CURRENT_YEAR', date('Y'));
+
+// Edit this after the latest election is done.
+$past_elections = array(
+	'20180626' => 'Colorado primary election results, 2017'
+);
 
 $counties = array(
 	'Adams',

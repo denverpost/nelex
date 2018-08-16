@@ -198,7 +198,7 @@ require_once './views.php';
                             <h6 id="iframe_breadcrumb">Colorado primary election results</h6>
                         <?php } ?>
                         <?php if ($iframe === false && $datafile_address == './results/20180626/default.json') { ?>
-                            <h4 style="margin:2em 0 0">Results from top races:</h4></h6>
+                            <h4 style="margin:2em 0 0">Results from top races:</h4>
                         <?php } ?>
                         <div id="results-container">
                         </div>
@@ -266,9 +266,7 @@ require_once './views.php';
             </main>
             <!-- RESULTS TABLE ENDS HERE -->
 
-
             <aside class="rightRail sidebarcol small-12 large-3 medium-4 columns" id="rightRail">
-
                 <div id='dfp-20' class='ad'>
                     <script>
                         if ( typeof googletag !== "undefined" ) googletag.display('dfp-20');
