@@ -338,6 +338,12 @@ hr {
     margin: 8px auto;
 }
 
+.rsaquo {
+    font-size:120%;
+    color:#aaa;
+    padding:0 .25em;
+}
+
 .ad {
     margin-bottom: 10px;
 }

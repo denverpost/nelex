@@ -173,16 +173,16 @@ require_once './views.php';
 
     <div id="wrapper" class="body-copy">
 
-        <div id="breadcrumbs">
+        <nav id="breadcrumbs">
             <a href="https://www.denverpost.com/politics/">Politics</a>
-            <span style="font-size:120%;color:#aaa;padding:0 .25em;">&rsaquo;</span> <a href="https://elections.denverpost.com/">Elections</a>
+            <span class="rsaquo">&rsaquo;</span> <a href="https://elections.denverpost.com/">Elections</a>
             <?php if ($election_date) { ?>
-                <span style="font-size:120%;color:#aaa;padding:0 .25em;">&rsaquo;</span> <a href="https://elections.denverpost.com/?date=<?php echo $election_date; ?>"><?php echo date('F j, Y',strtotime($election_date)); ?></a>
+                <span class="rsaquo">&rsaquo;</span> <a href="https://elections.denverpost.com/?date=<?php echo $election_date; ?>"><?php echo date('F j, Y',strtotime($election_date)); ?></a>
                 <?php if ($election_county) { ?>
-                <span style="font-size:120%;color:#aaa;padding:0 .25em;">&rsaquo;</span> <a href="https://elections.denverpost.com/?date=<?php echo $election_date; ?>&county=<?php echo $election_county; ?>"><?php echo $election_county_display; ?></a>
+                <span class="rsaquo">&rsaquo;</span> <a href="https://elections.denverpost.com/?date=<?php echo $election_date; ?>&county=<?php echo $election_county; ?>"><?php echo $election_county_display; ?></a>
                 <?php }
                 } ?>
-        </div>
+        </nav>
 
         <div class="row body-copy">
 
