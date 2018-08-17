@@ -57,9 +57,8 @@ foreach($directories as $dir) {
             $filepath = pathinfo($file);
             if ($file === '.' || $file === '..' || $file === 'index.php' || $filepath['extension'] !== 'json') {
                 continue;
-            } else {
-                $elections_available[$dir][] = $filepath['filename'];
-            }
+			}
+			$elections_available[$dir][] = $filepath['filename'];
         }
     }
 }

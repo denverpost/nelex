@@ -160,7 +160,7 @@ require_once './views.php';
 })
 (window,document,'script','dataLayer','GTM-TLFP4R');
 </script><!-- End Google Tag Manager -->
-<?php } ?>
+<?php } // END THIS IFRAME LOGIC ?>
 
 	<div id="dfmHeader"><!--Header Goes Here--></div>
     <div id="div-gpt-ad-top_leaderboard" class="dfp-ad dfp-top_leaderboard" data-ad-unit="top_leaderboard">
@@ -200,8 +200,7 @@ require_once './views.php';
                         <?php if ($iframe === false && $datafile_address == './results/20180626/default.json') { ?>
                             <h4 style="margin:2em 0 0">Results from top races:</h4>
                         <?php } ?>
-                        <div id="results-container">
-                        </div>
+                        <div id="results-container"></div>
                         <?php if ($iframe) { ?>
                             <h6><a href="https://elections.denverpost.com/?date=20180626&county=colorado">See full results for other races&nbsp;&raquo;</a></h6>
                         <?php } else if ($datafile_address == './results/20180626/default.json') { ?>
@@ -216,7 +215,7 @@ require_once './views.php';
                 <script id="results-template" type="text/x-handlebars-template">
                     {{#each this}}
                     <div class="race-wrap">
-                        <h3 class="race-title">{{race_name}}</h3> {{#eachByVotePct results "choice_vote_percent"}}
+                        <h3 id="" class="race-title">{{race_name}}</h3> {{#eachByVotePct results "choice_vote_percent"}}
                         <table id="results-table" class="fixed-width">
                             <tbody>
                                 <tr>
@@ -230,10 +229,9 @@ require_once './views.php';
                                 </tr>
                             </tbody>
                         </table>
-                    {{/eachByVotePct}}
+						{{/eachByVotePct}}
                     </div>
                     {{/each}}
-                    </div>
                 </script>
                 <script>
                     if (datafile !== 'false') { 
