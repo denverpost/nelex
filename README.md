@@ -5,7 +5,8 @@ The Denver Post's Next Election Results site.
 
 * Requirements [SQLite3](https://www.sqlite.org/index.html)
 
-### Dev Setup
+### Setup
+Instructions for setting this up on your machine for testing purposes. Written for linux/mac OSes.
 
 #### Database
 Uses an SQLite3 database to track ongoing things; use `bash init-db.bash` to initialize and empty database.

@@ -1,2 +1,2 @@
-.read table-defs.sql
+.read www/control/table-defs.sql
 .quit

@@ -46,6 +46,8 @@ if ($results = scandir('./results')) {
         }
     }
 }
+// VIEW
+// This determines the available elections
 sort($directories, SORT_NATURAL);
 $directories = array_reverse($directories);
 $elections_available = array();
@@ -65,6 +67,8 @@ foreach($directories as $dir) {
     sort($elections_available[$dir], SORT_NATURAL);
 }
 
+// VIEW
+// This determines the data in the view we're looking at
 $datafile_address = false;
 if ($election_date) {
     $datafile_address = './results/'.$election_date.'/';
