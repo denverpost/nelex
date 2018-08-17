@@ -57,8 +57,8 @@ require_once './views.php';
     <script src="./js/modernizr.min.js"></script>
     <script src="./js/handlebars.min.js"></script>
     <script>
-		// ELECTIONS VAR PREP
-		const d = document;
+        // ELECTIONS VAR PREP
+        const d = document;
         var datafile = <?php echo ($datafile_address) ? "'".$datafile_address."'" : 'false'; ?>;
         var elex_available_php = <?php echo ($elex_available) ? "'".$elex_available."'" : 'false'; ?>;
         var elex_available = [];
@@ -68,9 +68,9 @@ require_once './views.php';
     </script>    
     <?php if ($iframe === false) { ?>
     <script>
-		var s = document.createElement("script");
-		s.src = "//www.googletagservices.com/tag/js/gpt.js";
-		$("head").append(s);
+        var s = document.createElement("script");
+        s.src = "//www.googletagservices.com/tag/js/gpt.js";
+        $("head").append(s);
     </script>
     <?php } ?>
 
@@ -162,7 +162,7 @@ require_once './views.php';
 </script><!-- End Google Tag Manager -->
 <?php } // END THIS IFRAME LOGIC ?>
 
-	<div id="dfmHeader"><!--Header Goes Here--></div>
+    <div id="dfmHeader"><!--Header Goes Here--></div>
     <div id="div-gpt-ad-top_leaderboard" class="dfp-ad dfp-top_leaderboard" data-ad-unit="top_leaderboard">
         <script>
             if ( "undefined" !== typeof googletag ) {
@@ -229,7 +229,7 @@ require_once './views.php';
                                 </tr>
                             </tbody>
                         </table>
-						{{/eachByVotePct}}
+                        {{/eachByVotePct}}
                     </div>
                     {{/each}}
                 </script>
