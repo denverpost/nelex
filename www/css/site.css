@@ -15,7 +15,11 @@ div#results-container h3.race-title {
     /* color: #585858; */
 }
 
-div#results-container table#results-table {
+div#results-container table.results-table thead {
+    display: none;
+}
+
+div#results-container table.results-table {
     table-layout: fixed;
     width: 100%;
     border-collapse: collapse;
