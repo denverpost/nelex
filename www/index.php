@@ -19,7 +19,7 @@ require_once './views.php';
     <meta name="Copyright" content="Copyright &copy; The Denver Post." />
 
     <meta name="description" content="<?php echo $base_description; ?>">
-    <meta name="keywords" content="Colorado election results,Denver election results">
+    <meta name="keywords" content="Colorado election results,Denver election results,Denver metro election results">
 
     <meta name="twitter:card" value="summary" />
     <meta name="twitter:url" value="https://elections.denverpost.com" />
@@ -177,9 +177,9 @@ require_once './views.php';
             <a href="https://www.denverpost.com/politics/">Politics</a>
             <span class="rsaquo">&rsaquo;</span> <a href="https://elections.denverpost.com/">Elections</a>
             <?php if ($election_date) { ?>
-                <span class="rsaquo">&rsaquo;</span> <a href="https://elections.denverpost.com/?date=<?php echo $election_date; ?>"><?php echo date('F j, Y',strtotime($election_date)); ?></a>
+                <span class="rsaquo">&rsaquo;</span> <a href="./?date=<?php echo $election_date; ?>"><?php echo date('F j, Y',strtotime($election_date)); ?></a>
                 <?php if ($election_county) { ?>
-                <span class="rsaquo">&rsaquo;</span> <a href="https://elections.denverpost.com/?date=<?php echo $election_date; ?>&county=<?php echo $election_county; ?>"><?php echo $election_county_display; ?></a>
+                <span class="rsaquo">&rsaquo;</span> <?php echo $election_county_display; ?>
                 <?php }
                 } ?>
         </nav>
