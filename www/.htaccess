@@ -1,0 +1,5 @@
+RewriteEngine On
+#RewriteRule ^([0-9]{4})/ index.php?year=$1 [L]
+#RewriteRule ^([0-9]{4})/([0-9]{4})/ index.php?date=$1$2 [L]
+RewriteRule ^([0-9]{8})/$ index.php?date=$1 [L]
+RewriteRule ^([0-9]+)/([a-zA-Z-]+)/ index.php?date=$1&county=$2 [L]

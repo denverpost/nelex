@@ -25,7 +25,7 @@ require_once './views.php';
     <meta name="twitter:url" value="https://elections.denverpost.com" />
     <meta name="twitter:title" value="<?php echo $base_title; ?>" />
     <meta name="twitter:description" value="<?php echo $base_description; ?>" />
-    <meta name="twitter:image" value="<?php echo $base_url; ?>img/election-results-share.jpg" />
+    <meta name="twitter:image" value="<?php echo $base_domain; ?>img/election-results-share.jpg" />
     <meta name="twitter:site" value="@denverpost" />
     <meta name="twitter:domain" value="denverpost.com" />
     <meta name="twitter:creator" value="@joemurph">
@@ -39,8 +39,8 @@ require_once './views.php';
     <meta property="fb:app_id" content="105517551922"/>
     <meta property="og:title" content="<?php echo $base_title; ?>" />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="<?php echo $base_url; ?>" />
-    <meta property="og:image" content="<?php echo $base_url; ?>img/election-results-share.jpg" />
+    <meta property="og:url" content="<?php echo $base_domain; ?>" />
+    <meta property="og:image" content="<?php echo $base_domain; ?>img/election-results-share.jpg" />
     <meta property="og:site_name" content="The Denver Post" />
     <meta property="og:description" content="<?php echo $base_description; ?>" />
     <meta property="article:publisher" content="https://www.facebook.com/denverpost" />
@@ -48,9 +48,9 @@ require_once './views.php';
     <meta name="google-site-verification" content="2bKNvyyGh6DUlOvH1PYsmKN4KRlb-0ZI7TvFtuKLeAc" />
 
     <!-- STYLE SHEETS -->
-    <link rel="stylesheet" href="./css/foundation.min.css" />
-    <link rel="stylesheet" href="./css/normalize.min.css" />
-    <link rel="stylesheet" href="./css/site.css" />
+    <link rel="stylesheet" href="<?php echo $path_up ?>css/foundation.min.css" />
+    <link rel="stylesheet" href="<?php echo $path_up ?>css/normalize.min.css" />
+    <link rel="stylesheet" href="<?php echo $path_up ?>css/site.css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 
     <script src="./js/jquery.min.js"></script>
@@ -177,7 +177,7 @@ require_once './views.php';
             <a href="https://www.denverpost.com/politics/">Politics</a>
             <span class="rsaquo">&rsaquo;</span> <a href="https://elections.denverpost.com/">Elections</a>
             <?php if ($election_date) { ?>
-                <span class="rsaquo">&rsaquo;</span> <a href="./?date=<?php echo $election_date; ?>"><?php echo date('F j, Y',strtotime($election_date)); ?></a>
+                <span class="rsaquo">&rsaquo;</span> <a href="./<?php echo $election_date; ?>/"><?php echo date('F j, Y',strtotime($election_date)); ?></a>
                 <?php if ($election_county) { ?>
                 <span class="rsaquo">&rsaquo;</span> <?php echo $election_county_display; ?>
                 <?php }
@@ -204,9 +204,9 @@ require_once './views.php';
                         <?php } ?>
                         <div id="results-container"></div>
                         <?php if ($is_iframe) { ?>
-                            <h6><a href="https://elections.denverpost.com/?date=20180626&county=colorado">See full results for other races&nbsp;&raquo;</a></h6>
+                            <h6><a href="https://elections.denverpost.com/20180626/colorado/">See full results for other races&nbsp;&raquo;</a></h6>
                         <?php } else if ($datafile_address == './' . $result_dir . '/20180626/default.json') { ?>
-                            <h6 style="margin-top:1em;"><a href="https://elections.denverpost.com/?date=20180626&county=colorado">See full results for other races&nbsp;&raquo;</a></h6>
+                            <h6 style="margin-top:1em;"><a href="https://elections.denverpost.com/20180626/colorado/">See full results for other races&nbsp;&raquo;</a></h6>
                         <?php } ?>
                         <?php if ($is_iframe === false) { ?>
                         <h6 style="margin-top:2em;"><a href="http://data.denverpost.com/">See pre-2018 Colorado election results&nbsp;&raquo;</a></h6>

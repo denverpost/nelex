@@ -30,7 +30,19 @@ $is_iframe = (isset($_GET['iframe']) && $_GET['iframe'] == 'true') ? true : fals
 $is_homepage = false;
 if ( count($_GET) === 0 ) $is_homepage = true;
 
-$base_url = 'https://elections.denverpost.com/';
+// More view handling
+$base_domain = 'https://elections.denverpost.com/';
+$base_url = $base_domain;
+$path_up; // The path up gets us the relative path on local file calls
+if ( isset($_GET['date']) ) {
+	$path_up .= '../';
+	$base_url .= intval($_GET['date']) . '/';
+}
+if ( isset($_GET['county']) ) {
+	$path_up .= '../';
+	$base_url .=  htmlspecialchars($_GET['county']) . '/';
+}
+
 $base_title = 'Election Results - The Denver Post';
 $base_description = 'Colorado election results for national, state, county and city elections from The Denver Post.';
 $election_county_for_title = ($election_county && $election_county_display === 'All Counties') ? titleCase($election_county_display) : titleCase($election_county_display) . ' County';
