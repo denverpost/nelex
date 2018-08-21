@@ -289,16 +289,16 @@ require_once './views.php';
                             <select name="county" id="county_select" disabled class="disabled-grey">
                                 <option value="">Select county...</option>
                             </select>
-<script>
-var form_handler = function() {
-    // Two four six eight this is how we nav-i-gate.
-    var pathname = d.getElementById('date_select').value + '/';
-    var c = d.getElementById('county_select').value;
-    if ( c !== '' ) pathname += c + '/';
-    // The web_root var is set in the javascript in the head.
-    d.location.pathname = web_root + pathname;
-}
-</script>
+                            <script>
+                            var form_handler = function() {
+                                // Two four six eight this is how we nav-i-gate.
+                                var pathname = d.getElementById('date_select').value + '/';
+                                var c = d.getElementById('county_select').value;
+                                if ( c !== '' ) pathname += c + '/';
+                                // The web_root var is set in the javascript in the head.
+                                d.location.pathname = web_root + pathname;
+                            }
+                            </script>
                             <input type="button" onclick="form_handler();" value="Get results!" />
                         </form>
                     </div>
