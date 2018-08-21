@@ -22,7 +22,7 @@ function get_county_from_slug($cslug,$counties) {
     return ($return_county === 'Colorado') ? 'All Counties' : $return_county;
 }
 
-$iframe = (isset($_GET['iframe']) && $_GET['iframe'] == 'true') ? true : false;
+$is_iframe = (isset($_GET['iframe']) && $_GET['iframe'] == 'true') ? true : false;
 $election_date = (isset($_GET['date']) && ctype_digit($_GET['date'])) ? intval($_GET['date']) : '20180626';
 $election_county = (isset($_GET['county']) && preg_match('/^[A-Za-z-]+$/', $_GET['county'])) ? htmlspecialchars($_GET['county']) : false;
 $election_county_display = (get_county_from_slug($election_county,$counties) && $election_county) ? get_county_from_slug($election_county,$counties) : false;

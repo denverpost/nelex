@@ -66,7 +66,7 @@ require_once './views.php';
             elex_available = $.parseJSON(elex_available_php);
         }
     </script>    
-    <?php if ($iframe === false) { ?>
+    <?php if ($is_iframe === false) { ?>
     <script>
         var s = document.createElement("script");
         s.src = "//www.googletagservices.com/tag/js/gpt.js";
@@ -96,9 +96,9 @@ require_once './views.php';
       }
     </script>
 </head>
-<body<?php echo ($iframe) ? ' class="iframe"' : ''; ?>>
+<body<?php echo ($is_iframe) ? ' class="iframe"' : ''; ?>>
 <!-- Google Tag Manager Data Layer -->
-<?php if ($iframe === false) { ?>
+<?php if ($is_iframe === false) { ?>
   <script>
     var is_mobile = function() {
       var check = false;
@@ -196,19 +196,19 @@ require_once './views.php';
                 <!-- RESULTS TABLE STARTS HERE -->
                 <div class="row">                    
                     <div class="large-10 large-centered columns">
-                        <?php if ($iframe) { ?>
+                        <?php if ($is_iframe) { ?>
                             <h6 id="iframe_breadcrumb">Colorado primary election results</h6>
                         <?php } ?>
-                        <?php if ($iframe === false && $datafile_address == './' . $result_dir . '/20180626/default.json') { ?>
+                        <?php if ($is_iframe === false && $datafile_address == './' . $result_dir . '/20180626/default.json') { ?>
                             <h4 style="margin:2em 0 0">Results from top races:</h4>
                         <?php } ?>
                         <div id="results-container"></div>
-                        <?php if ($iframe) { ?>
+                        <?php if ($is_iframe) { ?>
                             <h6><a href="https://elections.denverpost.com/?date=20180626&county=colorado">See full results for other races&nbsp;&raquo;</a></h6>
                         <?php } else if ($datafile_address == './' . $result_dir . '/20180626/default.json') { ?>
                             <h6 style="margin-top:1em;"><a href="https://elections.denverpost.com/?date=20180626&county=colorado">See full results for other races&nbsp;&raquo;</a></h6>
                         <?php } ?>
-                        <?php if ($iframe === false) { ?>
+                        <?php if ($is_iframe === false) { ?>
                         <h6 style="margin-top:2em;"><a href="http://data.denverpost.com/">See pre-2018 Colorado election results&nbsp;&raquo;</a></h6>
                         <?php } ?>
                     </div>
@@ -329,7 +329,7 @@ require_once './views.php';
     <div id="dfmFooter" style="border-top:1px solid #ddd;"><!--CORPORATE FOOTER--></div>
     <script src="./js/nav.js"></script>
 
-    <?php if ($iframe) { ?>
+    <?php if ($is_iframe) { ?>
     <script>
     // Loop through all the links and add target="_parent"
     $("a").each(function(index) {
@@ -403,7 +403,7 @@ require_once './views.php';
         }
     });
     </script>
-    <?php if ($iframe === false) { ?>
+    <?php if ($is_iframe === false) { ?>
         <script>
         PARSELY = {
             // after PARSELY tracking code loads asynchronously
