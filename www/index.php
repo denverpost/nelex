@@ -61,7 +61,7 @@ require_once './views.php';
         const d = document;
         var base_domain = '<?php echo $base_domain; ?>';
         var web_root = '<?php echo $web_root; ?>';
-        var datafile = <?php echo ($datafile_address) ? "'".$datafile_address."'" : 'false'; ?>;
+        var datafile = <?php echo ($datafile_address) ? "'".$path_up . $datafile_address."'" : 'false'; ?>;
         var elex_available_php = <?php echo ($elex_available) ? "'".$elex_available."'" : 'false'; ?>;
         var elex_available = [];
         if ( elex_available_php !== 'false') {
@@ -220,6 +220,11 @@ require_once './views.php';
                     <div class="race-wrap">
                         <h3 id="" class="race-title">{{race_name}}</h3> {{#eachByVotePct results "choice_vote_percent"}}
                         <table id="results-table" class="fixed-width">
+                            <thead>
+                                <th>Candidate</th>
+                                <th>Vote percentage</th>
+                                <th>Vote count</th>
+                            </thead>
                             <tbody>
                                 <tr>
                                     <td class="table-data">{{choice_name}}</td><td class="table-data">{{choice_vote_percent}}%</td>
