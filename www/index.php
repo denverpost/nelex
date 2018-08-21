@@ -173,7 +173,7 @@ require_once './views.php';
 
     <div id="wrapper" class="body-copy">
 
-        <nav id="breadcrumbs">
+        <nav id="breadcrumbs" class="textleft">
             <a href="https://www.denverpost.com/politics/">Politics</a>
             <span class="rsaquo">&rsaquo;</span> <a href="https://elections.denverpost.com/">Elections</a>
             <?php if ($election_date) { ?>
@@ -271,7 +271,7 @@ require_once './views.php';
                     </script>
                 </div>
 
-                <nav id="select_form">
+                <nav id="select_form" class="textleft">
                     <div class="sidebar_headlines panel" style="margin-bottom:2em;">
                         <h4>Jump to results</h4>
                         <form method="get">

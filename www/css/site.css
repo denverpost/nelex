@@ -378,6 +378,9 @@ hr {
     width: 100%;
     line-height: 0.5;
 }
+.textleft {
+    text-align: left!important;
+}
 
 .stamp span,
 #wrapper nav ul span {
