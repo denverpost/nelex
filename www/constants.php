@@ -7,6 +7,8 @@ $past_elections = array(
 	'20180626' => 'Colorado primary election results, 2017'
 );
 
+$result_dir = 'results';
+
 $counties = array(
 	'Adams',
 	'Alamosa',

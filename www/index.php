@@ -197,13 +197,13 @@ require_once './views.php';
                         <?php if ($iframe) { ?>
                             <h6 id="iframe_breadcrumb">Colorado primary election results</h6>
                         <?php } ?>
-                        <?php if ($iframe === false && $datafile_address == './results/20180626/default.json') { ?>
+                        <?php if ($iframe === false && $datafile_address == './' . $result_dir . '/20180626/default.json') { ?>
                             <h4 style="margin:2em 0 0">Results from top races:</h4>
                         <?php } ?>
                         <div id="results-container"></div>
                         <?php if ($iframe) { ?>
                             <h6><a href="https://elections.denverpost.com/?date=20180626&county=colorado">See full results for other races&nbsp;&raquo;</a></h6>
-                        <?php } else if ($datafile_address == './results/20180626/default.json') { ?>
+                        <?php } else if ($datafile_address == './' . $result_dir . '/20180626/default.json') { ?>
                             <h6 style="margin-top:1em;"><a href="https://elections.denverpost.com/?date=20180626&county=colorado">See full results for other races&nbsp;&raquo;</a></h6>
                         <?php } ?>
                         <?php if ($iframe === false) { ?>

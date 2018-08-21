@@ -36,7 +36,6 @@ $display_title = ($election_county && $election_county_display) ? str_replace(' 
 
 
 // BUILD A LIST OF ELECTIONS and ELECTION DATA SOURCES
-$result_dir = 'results';
 $directories = array();
 if ($results = scandir('./' . $result_dir)) {
     foreach ($results as $result) {
