@@ -32,6 +32,7 @@ if ( count($_GET) === 0 ) $is_homepage = true;
 
 // More view handling
 $base_domain = 'https://elections.denverpost.com/';
+$web_root = str_replace('index.php', '', $_SERVER['PHP_SELF']);
 $base_url = $base_domain;
 $path_up; // The path up gets us the relative path on local file calls
 if ( isset($_GET['date']) ) {

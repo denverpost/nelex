@@ -59,6 +59,8 @@ require_once './views.php';
     <script>
         // ELECTIONS VAR PREP
         const d = document;
+        var base_domain = '<?php echo $base_domain; ?>';
+        var web_root = '<?php echo $web_root; ?>';
         var datafile = <?php echo ($datafile_address) ? "'".$datafile_address."'" : 'false'; ?>;
         var elex_available_php = <?php echo ($elex_available) ? "'".$elex_available."'" : 'false'; ?>;
         var elex_available = [];
@@ -191,7 +193,6 @@ require_once './views.php';
                 <div id="select_form_alt"></div>
 
                 <h1><?php echo $display_title; ?><?php if ($is_homepage === false) echo ', ' . date('F j Y',strtotime($election_date)); ?></h1>
-<?php echo $is_homepage ?>
 
                 <!-- RESULTS TABLE STARTS HERE -->
                 <div class="row">                    
@@ -288,7 +289,17 @@ require_once './views.php';
                             <select name="county" id="county_select" disabled class="disabled-grey">
                                 <option value="">Select county...</option>
                             </select>
-                            <input type="button" onclick="form.submit();" value="Get results!" />
+<script>
+var form_handler = function() {
+    // Two four six eight this is how we nav-i-gate.
+    var pathname = d.getElementById('date_select').value + '/';
+    var c = d.getElementById('county_select').value;
+    if ( c !== '' ) pathname += c + '/';
+    // The web_root var is set in the javascript in the head.
+    d.location.pathname = web_root + pathname;
+}
+</script>
+                            <input type="button" onclick="form_handler();" value="Get results!" />
                         </form>
                     </div>
                 </nav>
