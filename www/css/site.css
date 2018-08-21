@@ -75,6 +75,27 @@ body.iframe div#results-container td.table-data {
     padding: 2px;
 }
 
+/* Permalink icon styles */
+a svg.intralink path {
+    color: grey;
+}
+a:hover svg.intralink path {
+    color: red;
+}
+svg.intralink {
+    height: 36px;
+    width: 36px;
+    position: relative;
+    top: 12px;
+    margin-left: -35px;
+    left: 9px;
+}
+path {
+    fill: black;
+    fill-opacity: 1;
+    stroke-with: 0.2;
+    stroke-linejoin: round;
+}
 
 
 /* End Handlebar table styles */
@@ -434,9 +455,7 @@ h4 .intralink,
 h5 .intralink,
 h6 .intralink {
     color: #000;
-    vertical-align: middle;
-    visibility: hidden;
-    margin-left: -20px;
+    vertical-align: sub;
 }
 
 h1:hover .anchor,
@@ -454,7 +473,7 @@ h3:hover .anchor .intralink,
 h4:hover .anchor .intralink,
 h5:hover .anchor .intralink,
 h6:hover .anchor .intralink {
-    visibility: visible;
+    color: #f00;
 }
 
 /* Styles to make the mason CSS work */
