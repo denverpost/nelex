@@ -36,23 +36,25 @@ $display_title = ($election_county && $election_county_display) ? str_replace(' 
 
 
 // BUILD A LIST OF ELECTIONS and ELECTION DATA SOURCES
+$result_dir = 'results';
 $directories = array();
-if ($results = scandir('./results')) {
+if ($results = scandir('./' . $result_dir)) {
     foreach ($results as $result) {
         if ($result === '.' || $result === '..' || $result === 'index.php') continue;
 
-        if (is_dir('./results/' . $result)) {
+        if (is_dir('./' . $result_dir . '/' . $result)) {
             $directories[] = $result;
         }
     }
 }
+
 // VIEW
 // This determines the available elections
 sort($directories, SORT_NATURAL);
 $directories = array_reverse($directories);
 $elections_available = array();
 foreach($directories as $dir) {
-    if ($handle = scandir('./results/'.$dir.'/')) {
+    if ($handle = scandir('./' . $result_dir . '/'.$dir.'/')) {
         foreach ($handle as $file) {
             $filepath = pathinfo($file);
             if ($file === '.' || $file === '..' || $file === 'index.php' || $filepath['extension'] !== 'json') {
@@ -70,11 +72,11 @@ foreach($directories as $dir) {
 // This determines the data in the view we're looking at
 $datafile_address = false;
 if ($election_date) {
-    $datafile_address = './results/'.$election_date.'/';
+    $datafile_address = './' . $result_dir . '/'.$election_date.'/';
     if ($election_county) {
         $datafile_address .= $election_county.'.json';
     } else {
-        if (file_exists('./results/'.$election_date.'/default.json')) {
+        if (file_exists('./' . $result_dir . '/'.$election_date.'/default.json')) {
             $datafile_address .= 'default.json';
         } else {
             $datafile_address .= 'colorado.json';

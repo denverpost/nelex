@@ -162,7 +162,7 @@ require_once './views.php';
 </script><!-- End Google Tag Manager -->
 <?php } // END THIS IFRAME LOGIC ?>
 
-    <div id="dfmHeader"><!--Header Goes Here--></div>
+    <div id="adfmHeader"><!--Header Goes Here--></div>
     <div id="div-gpt-ad-top_leaderboard" class="dfp-ad dfp-top_leaderboard" data-ad-unit="top_leaderboard">
         <script>
             if ( "undefined" !== typeof googletag ) {
