@@ -205,7 +205,7 @@ require_once './views.php';
                         <?php } ?>
                         <div id="results-container"></div>
                         <?php if ($is_iframe) { ?>
-                            <h6><a href="https://elections.denverpost.com/20180626/colorado/">See full results for other races&nbsp;&raquo;</a></h6>
+                            <h6><a href="20180626/colorado/">See full results for other races&nbsp;&raquo;</a></h6>
                         <?php } else if ($is_homepage === true) { ?>
                             <h6 style="margin-top:1em;"><a href="20180626/colorado/">See full results for other races&nbsp;&raquo;</a></h6>
                         <?php } ?>
@@ -218,7 +218,7 @@ require_once './views.php';
                 <script id="results-template" type="text/x-handlebars-template">
                     {{#each this}}
                     <div class="race-wrap">
-                        <h3 id="" class="race-title">{{race_name}}</h3> {{#eachByVotePct results "choice_vote_percent"}}
+                        <h3 id="{{formatSlug race_name}}" class="race-title">{{race_name}}</h3> {{#eachByVotePct results "choice_vote_percent"}}
                         <table id="results-table" class="fixed-width">
                             <thead>
                                 <th>Candidate</th>
@@ -245,6 +245,16 @@ require_once './views.php';
                     if (datafile !== 'false') { 
                         $.getJSON(datafile, function(data) {
                             $(document).ready(function() {
+                                // Helper for generating ids suitable for URLS
+                                Handlebars.registerHelper('formatSlug', function(value) {
+                                    // from https://gist.github.com/mathewbyrne/1280286
+                                    return value.toString().toLowerCase()
+                                    .replace(/\s+/g, '-')           // Replace spaces with -
+                                    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+                                    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+                                    .replace(/^-+/, '')             // Trim - from start of text
+                                    .replace(/-+$/, '');            // Trim - from end of text
+                                });
                                 // Helper for formatting vote totals
                                 Handlebars.registerHelper('formatNumber', function(value) {
                                     //return value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "1,");
