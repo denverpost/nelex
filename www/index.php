@@ -22,10 +22,10 @@ require_once './views.php';
     <meta name="keywords" content="Colorado election results,Denver election results,Denver metro election results">
 
     <meta name="twitter:card" value="summary" />
-    <meta name="twitter:url" value="https://elections.denverpost.com" />
+    <meta name="twitter:url" value="<?php echo $base_url; ?>" />
     <meta name="twitter:title" value="<?php echo $base_title; ?>" />
     <meta name="twitter:description" value="<?php echo $base_description; ?>" />
-    <meta name="twitter:image" value="<?php echo $base_domain; ?>img/election-results-share.jpg" />
+    <meta name="twitter:image" value="<?php echo $web_root; ?>img/election-results-share.jpg" />
     <meta name="twitter:site" value="@denverpost" />
     <meta name="twitter:domain" value="denverpost.com" />
     <meta name="twitter:creator" value="@joemurph">
@@ -39,8 +39,8 @@ require_once './views.php';
     <meta property="fb:app_id" content="105517551922"/>
     <meta property="og:title" content="<?php echo $base_title; ?>" />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="<?php echo $base_domain; ?>" />
-    <meta property="og:image" content="<?php echo $base_domain; ?>img/election-results-share.jpg" />
+    <meta property="og:url" content="<?php echo $base_url; ?>" />
+    <meta property="og:image" content="<?php echo $web_root; ?>img/election-results-share.jpg" />
     <meta property="og:site_name" content="The Denver Post" />
     <meta property="og:description" content="<?php echo $base_description; ?>" />
     <meta property="article:publisher" content="https://www.facebook.com/denverpost" />
@@ -53,9 +53,9 @@ require_once './views.php';
     <link rel="stylesheet" href="<?php echo $path_up ?>css/site.css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 
-    <script src="./js/jquery.min.js"></script>
-    <script src="./js/modernizr.min.js"></script>
-    <script src="./js/handlebars.min.js"></script>
+    <script src="<?php echo $path_up ?>js/jquery.min.js"></script>
+    <script src="<?php echo $path_up ?>js/modernizr.min.js"></script>
+    <script src="<?php echo $path_up ?>js/handlebars.min.js"></script>
     <script>
         // ELECTIONS VAR PREP
         const d = document;
@@ -177,9 +177,9 @@ require_once './views.php';
 
         <nav id="breadcrumbs" class="textleft">
             <a href="https://www.denverpost.com/politics/">Politics</a>
-            <span class="rsaquo">&rsaquo;</span> <a href="https://elections.denverpost.com/">Elections</a>
+            <span class="rsaquo">&rsaquo;</span> <a href="<?php echo $web_root; ?>">Elections</a>
             <?php if ($election_date) { ?>
-                <span class="rsaquo">&rsaquo;</span> <a href="./<?php echo $election_date; ?>/"><?php echo date('F j, Y',strtotime($election_date)); ?></a>
+                <span class="rsaquo">&rsaquo;</span> <a href="<?php echo $path_up . $election_date; ?>/"><?php echo date('F j, Y',strtotime($election_date)); ?></a>
                 <?php if ($election_county) { ?>
                 <span class="rsaquo">&rsaquo;</span> <?php echo $election_county_display; ?>
                 <?php }
