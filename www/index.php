@@ -25,7 +25,7 @@ require_once './views.php';
     <meta name="twitter:url" value="<?php echo $base_url; ?>" />
     <meta name="twitter:title" value="<?php echo $base_title; ?>" />
     <meta name="twitter:description" value="<?php echo $base_description; ?>" />
-    <meta name="twitter:image" value="<?php echo $web_root; ?>img/election-results-share.jpg" />
+    <meta name="twitter:image" value="<?php echo $base_domain . $web_root; ?>img/election-results-share.jpg" />
     <meta name="twitter:site" value="@denverpost" />
     <meta name="twitter:domain" value="denverpost.com" />
     <meta name="twitter:creator" value="@joemurph">
@@ -40,7 +40,7 @@ require_once './views.php';
     <meta property="og:title" content="<?php echo $base_title; ?>" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="<?php echo $base_url; ?>" />
-    <meta property="og:image" content="<?php echo $web_root; ?>img/election-results-share.jpg" />
+    <meta property="og:image" content="<?php echo $base_domain . $web_root; ?>img/election-results-share.jpg" />
     <meta property="og:site_name" content="The Denver Post" />
     <meta property="og:description" content="<?php echo $base_description; ?>" />
     <meta property="article:publisher" content="https://www.facebook.com/denverpost" />
