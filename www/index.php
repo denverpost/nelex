@@ -190,7 +190,9 @@ require_once './views.php';
 
                 <div id="select_form_alt"></div>
 
-                <h1><?php echo $display_title; ?></h1>
+                <h1><?php echo $display_title; ?><?php if ($is_homepage === false) echo ', ' . date('F j Y',strtotime($election_date)); ?></h1>
+<?php echo $is_homepage ?>
+
                 <!-- RESULTS TABLE STARTS HERE -->
                 <div class="row">                    
                     <div class="large-10 large-centered columns">
