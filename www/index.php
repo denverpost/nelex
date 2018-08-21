@@ -7,7 +7,7 @@ require_once './views.php';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <title><?php echo $base_title; ?></title>
+    <title><?php echo $display_title; ?></title>
 
     <link rel="canonical" href="<?php echo $base_url; ?>" />
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
