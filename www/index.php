@@ -326,9 +326,7 @@ require_once './views.php';
 
     </div><!-- END wrapper -->
 
-    <section id="content-footer" class="body-copy">
-        
-    </section>
+    <section id="content-footer" class="body-copy"></section>
 
     <div id="div-gpt-ad-bottom_leaderboard" class="dfp-ad dfp-bottom_leaderboard" data-ad-unit="bottom_leaderboard">
         <script>
@@ -338,7 +336,7 @@ require_once './views.php';
         </script>
     </div>
     <div id="dfmFooter" style="border-top:1px solid #ddd;"><!--CORPORATE FOOTER--></div>
-    <script src="./js/nav.js"></script>
+    <script src="<?php echo $path_up; ?>js/nav.js"></script>
 
     <?php if ($is_iframe) { ?>
     <script>
@@ -415,26 +413,26 @@ require_once './views.php';
     });
     </script>
     <?php if ($is_iframe === false) { ?>
-        <script>
-        PARSELY = {
-            // after PARSELY tracking code loads asynchronously
-            onload: function() {
-                // bind pageview tracking for all "next" links.
-                // example event listener; set your own based 
-                // on your site design
-                jQuery("a.next").bind("click", function() {
-                    var url = this.href,
-                        urlref = location.href;
+    <script>
+    PARSELY = {
+        // after PARSELY tracking code loads asynchronously
+        onload: function() {
+            // bind pageview tracking for all "next" links.
+            // example event listener; set your own based 
+            // on your site design
+            jQuery("a.next").bind("click", function() {
+                var url = this.href,
+                    urlref = location.href;
 
-                    PARSELY.beacon.trackPageView({
-                        url: url,
-                        urlref: urlref,
-                        js: 1
-                    });
-                    return true;
+                PARSELY.beacon.trackPageView({
+                    url: url,
+                    urlref: urlref,
+                    js: 1
                 });
-            }
-        };
+                return true;
+            });
+        }
+    };
     </script>
     <!-- START Parse.ly Include: Standard -->
     <div id="parsely-root" style="display: none">
